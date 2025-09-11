@@ -3,49 +3,58 @@
 
 void type1(int number){
     int maxNumber;
-    printf("Введите 1 число для типа 1 ");
-    scanf_s("%d", &maxNumber);
-        for (int i = 2; i < number + 1; i++){
-            int temp_num;
-        printf("Введите %d число для типа 1 ", i);
+    for (int i = 0; i < number + 1; i++){
+        int temp_num;
+        printf("Введите %d число для типа 1 ", i+1);
         scanf_s("%d", &temp_num);
-        if (temp_num > maxNumber){
+        if (i == 0){
             maxNumber = temp_num;
+        } 
+        else {
+            if (temp_num > maxNumber){
+                maxNumber = temp_num;
+            }
         }
-    }
     printf("Максимальное число в типе 1: %d\n", maxNumber);
+    }
 }
 
 void type2(int number){
     int maxNumber;
-    int i = 1;
-    printf("Введите 1 число для типа 2 ");
-    scanf_s("%d", &maxNumber);
+    int i = 0;
     while (i < number){
         int temp_num;
         printf("Введите %d число для типа 2 ", i+1);
         scanf_s("%d", &temp_num);
-        i++;
-        if (temp_num > maxNumber){
+        if (i == 0){
             maxNumber = temp_num;
         }
+        else {
+            if (temp_num > maxNumber){
+                maxNumber = temp_num;
+            }
+        }
+        i++;
     }
     printf("Максимальное число в типе 2: %d\n", maxNumber);
 }
 
 void type3(int number){
     int maxNumber;
-    int i = 1;
-    printf("Введите 1 число для типа 3 ");
-    scanf_s("%d", &maxNumber);
+    int i = 0;
     do {
         int temp_num;
         printf("Введите %d число для типа 3 ", i+1);
         scanf_s("%d", &temp_num);
-        i++;
-        if (temp_num > maxNumber){
+        if (i == 0){
             maxNumber = temp_num;
         }
+        else{
+            if (temp_num > maxNumber){
+                maxNumber = temp_num;
+            }
+        }
+        i++;
     } while (i < number);
     printf("Максимальное число в типе 3: %d\n", maxNumber);
 }
