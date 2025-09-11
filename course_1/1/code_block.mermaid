@@ -1,0 +1,66 @@
+flowchart TD
+    Start([Начало]) --> Input1[Введите количество чисел]
+    Input1 --> Read1[Считать number]
+    Read1 --> Input2[Выберите функцию: 1-for, 2-while, 3-do]
+    Input2 --> Read2[Считать chose]
+    Read2 --> Choice{chose}
+    
+    Choice -- 1 --> Call1[Вызвать type1number]
+    Choice -- 2 --> Call2[Вызвать type2number]
+    Choice -- 3 --> Call3[Вызвать type3number]
+    Choice -- else --> Error[Вывести &quot;Неизвестный выбор&quot;]
+    
+    Call1 --> End
+    Call2 --> End
+    Call3 --> End
+    Error --> End
+    
+    subgraph type1 [Функция type1number]
+        T1Start[Вход] --> T1Init[Инициализировать i=0, maxNumber]
+        T1Init --> T1Condition{i < number}
+        T1Condition -- Да --> T1Input[Ввести число temp_num]
+        T1Input --> T1Check{i==0}
+        T1Check -- Да --> T1SetMax1[maxNumber = temp_num]
+        T1Check -- Нет --> T1Compare{temp_num > maxNumber}
+        T1Compare -- Да --> T1SetMax2[maxNumber = temp_num]
+        T1Compare -- Нет --> T1Increment
+        T1SetMax1 --> T1Increment[Увеличить i++]
+        T1SetMax2 --> T1Increment
+        T1Increment --> T1Condition
+        T1Condition -- Нет --> T1Output[Вывести maxNumber]
+        T1Output --> T1Return[Возврат]
+    end
+    
+    subgraph type2 [Функция type2number]
+        T2Start[Вход] --> T2Init[Инициализировать i=0, maxNumber]
+        T2Init --> T2Condition{i < number}
+        T2Condition -- Да --> T2Input[Ввести число temp_num]
+        T2Input --> T2Check{i==0}
+        T2Check -- Да --> T2SetMax1[maxNumber = temp_num]
+        T2Check -- Нет --> T2Compare{temp_num > maxNumber}
+        T2Compare -- Да --> T2SetMax2[maxNumber = temp_num]
+        T2Compare -- Нет --> T2Increment
+        T2SetMax1 --> T2Increment[Увеличить i++]
+        T2SetMax2 --> T2Increment
+        T2Increment --> T2Condition
+        T2Condition -- Нет --> T2Output[Вывести maxNumber]
+        T2Output --> T2Return[Возврат]
+    end
+    
+    subgraph type3 [Функция type3number]
+        T3Start[Вход] --> T3Init[Инициализировать i=0, maxNumber]
+        T3Init --> T3Input[Ввести число temp_num]
+        T3Input --> T3Check{i==0}
+        T3Check -- Да --> T3SetMax1[maxNumber = temp_num]
+        T3Check -- Нет --> T3Compare{temp_num > maxNumber}
+        T3Compare -- Да --> T3SetMax2[maxNumber = temp_num]
+        T3Compare -- Нет --> T3Increment
+        T3SetMax1 --> T3Increment[Увеличить i++]
+        T3SetMax2 --> T3Increment
+        T3Increment --> T3Condition{i < number}
+        T3Condition -- Да --> T3Input
+        T3Condition -- Нет --> T3Output[Вывести maxNumber]
+        T3Output --> T3Return[Возврат]
+    end
+
+    End([Конец])
