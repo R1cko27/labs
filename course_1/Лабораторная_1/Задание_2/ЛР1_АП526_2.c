@@ -4,7 +4,9 @@
 
 int Count_Pos(int number) {
     int p = 1;
-    while ((number / (int)pow(10, p)) > 0) p++;
+    while ((number / (int)pow(10, p)) > 0) {
+        p++;
+    }
     return p;
 }
 
