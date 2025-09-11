@@ -5,8 +5,8 @@ void type1(int number){
     int maxNumber;
     printf("Введите 1 число для типа 1 ");
     scanf_s("%d", &maxNumber);
-    for (int i = 2; i < number+1; i++){
-        int temp_num;
+        for (int i = 2; i < number + 1; i++){
+            int temp_num;
         printf("Введите %d число для типа 1 ", i);
         scanf_s("%d", &temp_num);
         if (temp_num > maxNumber){
