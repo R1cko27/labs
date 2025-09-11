@@ -15,8 +15,8 @@ void type1(int number) {
                 maxNumber = temp_num;
             }
         }
-        printf("Максимальное число в типе 1: %d\n", maxNumber);
     }
+    printf("Максимальное число в типе 1: %d\n", maxNumber);
 }
 
 void type2(int number) {
