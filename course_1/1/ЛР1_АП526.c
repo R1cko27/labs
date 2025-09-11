@@ -4,11 +4,11 @@
 void type1(int number){
     int maxNumber;
     printf("Enter 1 number for type 1 ");
-    scanf("%d", &maxNumber);
+    scanf_c("%d", &maxNumber);
     for (int i = 2; i < number+1; i++){
         int temp_num;
         printf("Enter %d number for type 1 ", i);
-        scanf("%d", &temp_num);
+        scanf_c("%d", &temp_num);
         if (temp_num > maxNumber){
             maxNumber = temp_num;
         }
@@ -20,11 +20,11 @@ void type2(int number){
     int maxNumber;
     int i = 1;
     printf("Enter 1 number for type 2 ");
-    scanf("%d", &maxNumber);
+    scanf_c("%d", &maxNumber);
     while (i < number){
         int temp_num;
         printf("Enter %d number for type 2 ", i+1);
-        scanf("%d", &temp_num);
+        scanf_c("%d", &temp_num);
         i++;
         if (temp_num > maxNumber){
             maxNumber = temp_num;
@@ -37,11 +37,11 @@ void type3(int number){
     int maxNumber;
     int i = 1;
     printf("Enter 1 number for type 3 ");
-    scanf("%d", &maxNumber);
+    scanf_c("%d", &maxNumber);
     do {
         int temp_num;
         printf("Enter %d number for type 3 ", i+1);
-        scanf("%d", &temp_num);
+        scanf_c("%d", &temp_num);
         i++;
         if (temp_num > maxNumber){
             maxNumber = temp_num;
