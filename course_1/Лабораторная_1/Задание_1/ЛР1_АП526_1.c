@@ -65,7 +65,7 @@ int main() {
     setlocale(LC_ALL, "Rus");
     printf("Введите количество чисел ");
     scanf_s("%d", &number);
-    printf("Выбирите функцию, которую хотите использовать\n1. Цикл for (type 1)\n2. Цикл while (type 2)\n3. Цикл do (type 3)\n");
+    printf("Тест Выбирите функцию, которую хотите использовать\n1. Цикл for (type 1)\n2. Цикл while (type 2)\n3. Цикл do (type 3)\n");
     scanf_s("%d", &chose);
     if (chose == 1) {
         type1(number);
