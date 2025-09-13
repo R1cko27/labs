@@ -23,7 +23,7 @@ void answer(int number) {
 int main() {
     setlocale(LC_ALL, "Rus");
     int numberInput;
-    printf("Введите число ");
+    printf("Введите любое число ");
     scanf_s("%d", &numberInput);
     answer(numberInput);
 }
