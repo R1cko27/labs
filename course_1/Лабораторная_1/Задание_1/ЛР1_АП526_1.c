@@ -77,6 +77,6 @@ int main() {
         type3(number);
     }
     else {
-        printf("Неизвестный выбор");
+        printf("Неизвестный выбор 2");
     }
 }
