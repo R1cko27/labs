@@ -3,5 +3,5 @@
 
 int main() {
     setlocale(LC_ALL, "Rus");
-    printf("Привет, мир!");
+    printf("Привет, мир! - тест");
 }
