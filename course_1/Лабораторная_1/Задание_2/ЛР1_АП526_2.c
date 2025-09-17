@@ -25,5 +25,12 @@ int main() {
     int numberInput;
     printf("Введите любое число ");
     scanf_s("%d", &numberInput);
+    while (numberInput <= 0) {
+        printf("Ошибка, повторите еще раз\n");
+        printf("Введите число ");
+        scanf_s("%d", &numberInput);
+    }
     answer(numberInput);
+    return 0;
 }
+
