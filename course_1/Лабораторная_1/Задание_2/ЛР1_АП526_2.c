@@ -13,9 +13,22 @@ int Count_Pos(int number) {
 void answer(int number) {
     int countOfNumber = 0;
     int i = 1;
+
     while (countOfNumber < number) {
+        int digits = Count_Pos(i);
+
+        if (countOfNumber + digits > number){
+            int digitsNeeded = number - countOfNumber;
+            int divisor = 1;
+            for (int j = 0; j < digits - digitsNeeded; j++){
+                divisor *= 10;
+            }
+            printf("%d", i/divisor);
+            break;
+        }
+
         printf("%d", i);
-        countOfNumber += Count_Pos(i);
+        countOfNumber += digits;
         i++;
     }
 }
@@ -33,4 +46,3 @@ int main() {
     answer(numberInput);
     return 0;
 }
-
