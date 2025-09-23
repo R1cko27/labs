@@ -17,13 +17,17 @@ void answer(int number) {
     while (countOfNumber < number) {
         int digits = Count_Pos(i);
 
-        if (countOfNumber + digits > number){
-            int digitsNeeded = number - countOfNumber;
+        if (countOfNumber + digits > number) {
+            int digitsNeeded = 0; 
+            digitsNeeded = number - countOfNumber;
             int divisor = 1;
-            for (int j = 0; j < digits - digitsNeeded; j++){
+            int cn = 0;
+            cn = digits - digitsNeeded;
+            for (int j = 0; j < cn; j++) {
                 divisor *= 10;
             }
-            printf("%d", i/divisor);
+            int res = i / divisor;
+            printf("%d", res);
             break;
         }
 
