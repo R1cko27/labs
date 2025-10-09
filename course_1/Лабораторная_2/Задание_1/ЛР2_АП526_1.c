@@ -22,9 +22,8 @@ void func(char* string) {
         }
 
         if (string[i] == char_delet) {
-            printf("");
+            continue;
         }
-
         else {
             printf("%c", string[i]);
         }
