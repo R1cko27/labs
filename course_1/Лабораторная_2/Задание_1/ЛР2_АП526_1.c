@@ -4,33 +4,32 @@
 #include <string.h>
 
 void func(char* string) {
-    char char_delet;
+    int char_delet;
     int j = 0;
     string[strcspn(string, "\n")] = '\0';
     printf("Ответ: ");
+    char_delet = -1;
+    
     for (int i = 0; i < strlen(string); i++) {
-        if (i == 0) {
-            char_delet = string[i];
-            printf("%c", string[i]);
-        }
-
-        if (char_delet == '␦') {
-            if (isalpha(string[i])) {
-                char_delet = string[i];
+        if (char_delet == -1) {
+            if (isalpha((unsigned char)string[i])) {
+                char_delet = (unsigned char)string[i];
+                printf("%c", string[i]);
+            } else {
                 printf("%c", string[i]);
             }
-        }
-
-        if (string[i] == char_delet) {
             continue;
         }
-        else {
-            printf("%c", string[i]);
-        }
 
-        if (!isalpha(string[i])) {
-            char_delet = '␦';
+        if ((unsigned char)string[i] == char_delet) {
+            continue;
         }
+        
+        if (!isalpha((unsigned char)string[i])) {
+            char_delet = -1;
+        }
+        
+        printf("%c", string[i]);
     }
 }
 
