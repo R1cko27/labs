@@ -13,11 +13,11 @@ int Count_Pos(int number) {
     return p;
 }
 
-char* func(int number) {
+void func(int number) {
     int countOfNumber = 0;
     int i = 1;
-    char* answer = malloc(number + 1); // Динамическая память
-    answer[0] = '\0'; // Делам ее изначально пустой
+    char answer[1000];
+    answer[0] = '\0';
 
     while (countOfNumber < number) {
         int digits = Count_Pos(i);
@@ -28,18 +28,18 @@ char* func(int number) {
             int res = i / divisor;
             
             char str_res[2];
-            sprintf(str_res, "%d", res); // Перевод числа в строку
+            sprintf(str_res, "%d", res);
             strcat(answer, str_res);
             break;
         }
         
         char str_i[20];
-        sprintf(str_i, "%d", i); // Перевод числа в строку
-        strcat(answer, str_i); // Конкатенция. К строке answer прибавляем str_i
+        sprintf(str_i, "%d", i);
+        strcat(answer, str_i);
         countOfNumber += digits;
         i++;
     }
-    return answer;
+    printf("%s", answer);
 }
 
 int main() {
@@ -54,9 +54,6 @@ int main() {
         printf("Введите число ");
         scanf("%d", &numberInput);
     }
-    
-    char* answer = func(numberInput);
-    printf("%s", answer);
-    free(answer);  // Освобождаем память
+    func(numberInput);
     return 0;
 }
