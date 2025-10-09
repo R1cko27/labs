@@ -4,7 +4,6 @@
 #include <string.h>
 
 void func(char* string) {
-    char new_string[1000] = "";
     char char_delet;
     int j = 0;
     string[strcspn(string, "\n")] = '\0';
@@ -13,31 +12,29 @@ void func(char* string) {
         if (i == 0) {
             char_delet = string[i];
             printf("%c", string[i]);
-            new_string[j++] = string[i];
         }
 
-        if (char_delet == '0') {
+        if (char_delet == '␦') {
             if (isalpha(string[i])) {
                 char_delet = string[i];
                 printf("%c", string[i]);
-                new_string[j++] = string[i];
             }
         }
 
         if (string[i] == char_delet) {
             printf("");
         }
+
         else {
             printf("%c", string[i]);
-            new_string[j++] = string[i];
         }
 
         if (!isalpha(string[i])) {
-            char_delet = '0';
+            char_delet = '␦';
         }
     }
-
 }
+
 int main() {
     setlocale(LC_ALL, "Rus");
     char string[1000];
