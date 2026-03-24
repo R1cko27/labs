@@ -476,10 +476,8 @@ int main() {
 
     printf("\nСодержимое прочитанного массива:\n");
     for (int i = 0; i < read_count; i++) {
-        printf("Структура %d:\n", i);
         print_study_group(&read_groups[i]);
     }
-
         return 0;
     }
 #else
