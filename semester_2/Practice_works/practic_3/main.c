@@ -12,7 +12,7 @@
 #define TASK2 2
 #define TASK3 3
 
-#define CURRENT_TASK 2
+#define CURRENT_TASK 1
 
 #if CURRENT_TASK == TASK1
 void print_bytes(const char* name, void* data, size_t size) {

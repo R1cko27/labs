@@ -55,7 +55,7 @@ int Delete_edit(int key, btree **node) {
       return 1;
     }
     if((*node)->left == NULL) { 
-      t = *node;
+      t = *node;  
       *node = (*node)->right; 
       free(t); 
       printf("Delete Left = 0\n");
@@ -133,7 +133,7 @@ int main() {
 
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 
-  Delete_edit(50, &root); // удаляем узел с значением 37
+  Delete_edit(37, &root); // удаляем узел с значением 37
   Ins_Btree_edit(67, &root); // добавляем узел с значением 67
 
   export_tree_to_json(root, "export2.json");
