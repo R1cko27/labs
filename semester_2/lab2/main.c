@@ -8,7 +8,6 @@ typedef struct btree {
   struct btree *left, *right; // Указатели на потомков
 } btree;
 
-
 // Поиск с включением без дубликатов
 void Ins_Btree_edit(int val, btree **q) {
   if(*q == NULL) {
