@@ -128,14 +128,14 @@ int main() {
     if(d[i] == 0) break;
     Ins_Btree_edit(d[i], &root); i++; // заполняем дерево массивом чисел
   }
-  export_tree_to_json(root, "export1.json");
+  export_tree_to_json(root, "export/export1.json");
 
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 
   Delete_edit(37, &root); // удаляем узел с значением 37
   Ins_Btree_edit(67, &root); // добавляем узел с значением 67
 
-  export_tree_to_json(root, "export2.json");
+  export_tree_to_json(root, "export/export2.json");
   printf("After Delete and Past:\n");
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 

@@ -1,5 +1,5 @@
-#include "study_group.h"
-#include "list_structures.h"
+#include "modules/list_structures.h"
+#include "modules/list_structures.h"
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
@@ -342,7 +342,7 @@ int main(){
 
       printf("\nДерево до удаления:\n");
       printTreeRec(root1, 0, 5);
-      export_tree_to_json(root1, "export3.json");
+      export_tree_to_json(root1, "export/export3.json");
       printf("\n");
 
       printf("\nСписок групп");
@@ -356,23 +356,23 @@ int main(){
       printf("\nПосле удаления %s:\n", groups[choice-1].group_name);
       printTreeRec(root1, 0, 5);
       printf("\n");
-      export_tree_to_json(root1, "export4.json");
-      createBin(root1, "tree.bin");
+      export_tree_to_json(root1, "export/export4.json");
+      createBin(root1, "output/tree.bin");
     }
 
     // =============== ПУНКТ 3 ===============
     btree *root2 = NULL;
-    readBinAndAddToTree("tree.bin", &root2);
+    readBinAndAddToTree("output/tree.bin", &root2);
     printf("\n Дерево воссозданное из файла tree.bin");
-    export_tree_to_json(root2, "export5.json");
+    export_tree_to_json(root2, "export/export5.json");
     deleteTree(&root2);
 
-    saveTreeToFile(root1, "full_tree.bin");
+    saveTreeToFile(root1, "output/full_tree.bin");
     deleteTree(&root1);
 
-    btree *root3 = loadTreeFromFile("full_tree.bin");
+    btree *root3 = loadTreeFromFile("output/full_tree.bin");
     printTreeRec(root3, 0, 5);
-    export_tree_to_json(root3, "export6.json");
+    export_tree_to_json(root3, "export/export6.json");
     deleteTree(&root3);
     return 0;
 }
