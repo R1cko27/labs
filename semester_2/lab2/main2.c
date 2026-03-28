@@ -229,6 +229,55 @@ int export_tree_to_json(btree *root, const char *filename) {
     return 1;
 }
 
+static void writeNode(FILE *file, btree *node) {
+    if (node == NULL) {
+        int marker = 0;
+        fwrite(&marker, sizeof(int), 1, file);
+        return;
+    }
+    
+    int marker = 1;
+    fwrite(&marker, sizeof(int), 1, file);
+    fwrite(&node->data, sizeof(StudyGroup), 1, file);
+    writeNode(file, node->left);
+    writeNode(file, node->right);
+}
+
+void saveTreeToFile(btree *root, const char *filename) {
+    FILE *file = fopen(filename, "wb");
+    if (file != NULL) {
+        writeNode(file, root);
+        fclose(file);
+    }
+}
+
+static btree* readNode(FILE *file) {
+    int marker;
+    if (fread(&marker, sizeof(int), 1, file) != 1) return NULL;
+    
+    if (marker == 0) return NULL;
+    
+    btree *node = (btree*)malloc(sizeof(btree));
+    fread(&node->data, sizeof(StudyGroup), 1, file);
+    node->left = readNode(file);
+    node->right = readNode(file);
+    
+    return node;
+}
+
+btree* loadTreeFromFile(const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL) {
+        printf("Ошибка открытия файла %s\n", filename);
+        return NULL;
+    }
+    
+    btree *root = readNode(file);
+    fclose(file);
+
+    return root;
+}
+
 int main(){
   // =============== ПУНКТ 2 ===============
     StudyGroup groups[GROUP_COUNT];
@@ -315,7 +364,15 @@ int main(){
     btree *root2 = NULL;
     readBinAndAddToTree("tree.bin", &root2);
     printf("\n Дерево воссозданное из файла tree.bin");
-    printTreeRec(root2, 0, 5);
     export_tree_to_json(root2, "export5.json");
+    deleteTree(&root2);
+
+    saveTreeToFile(root1, "full_tree.bin");
+    deleteTree(&root1);
+
+    btree *root3 = loadTreeFromFile("full_tree.bin");
+    printTreeRec(root3, 0, 5);
+    export_tree_to_json(root3, "export6.json");
+    deleteTree(&root3);
     return 0;
 }
