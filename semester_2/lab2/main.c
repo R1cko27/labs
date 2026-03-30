@@ -68,9 +68,14 @@ int Delete_edit(int key, btree **node) {
       return 1;
     }
     up = *node;
+    int flag = 0;
     if (countNodes((*node)->left) >= countNodes((*node)->right)){ //СМОТРИМ В КАКОЙ СТОРОНЕ УЗЛОВ БОЛЬШЕ 
         t = (*node)->left;
-    } else t = (*node)->right;
+    } else {
+      flag = 1;
+      t = (*node)->right;
+    }
+
     while (t->right != NULL) {
       up = t;
       t = t-> right; 
@@ -80,7 +85,9 @@ int Delete_edit(int key, btree **node) {
       if(t->left != NULL) up->right = t->left;
       else up->right = NULL;
     }
-    else (*node)->left = t->left;
+    else {if (flag == 1) (*node)->right = t->left; 
+          else (*node)->left = t->left;
+      }
     free(t);
     printf("Delete Two\n");
     return 1;
@@ -120,7 +127,7 @@ int export_tree_to_json(btree *root, const char *filename) {
 }
 
 int main() {
-  int d[] = {50,30,55,25,35,53,60,10,32,37,62,15,31,33,40,0};
+  int d[] = {50,55,53,60,40,52,59,58,57,0};
   int i = 0;
   btree *root = NULL;
   
@@ -132,8 +139,8 @@ int main() {
 
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 
-  Delete_edit(37, &root); // удаляем узел с значением 37
-  Ins_Btree_edit(67, &root); // добавляем узел с значением 67
+  Delete_edit(55, &root); // удаляем узел с значением 37
+  //Ins_Btree_edit(67, &root); // добавляем узел с значением 67
 
   export_tree_to_json(root, "export/export2.json");
   printf("After Delete and Past:\n");
