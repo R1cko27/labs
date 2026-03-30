@@ -69,9 +69,13 @@ int Delete_edit(StudyGroup* group, btree **node) {
       return 1;
     }
     up = *node;
+    int flag = 0;
     if (countNodes((*node)->left) >= countNodes((*node)->right)){ //СМОТРИМ В КАКОЙ СТОРОНЕ УЗЛОВ БОЛЬШЕ 
         t = (*node)->left;
-    } else t = (*node)->right;
+    } else {
+        flag = 1;
+        t = (*node)->right;
+    }
     while (t->right != NULL) {
       up = t;
       t = t-> right; 
@@ -81,7 +85,9 @@ int Delete_edit(StudyGroup* group, btree **node) {
       if(t->left != NULL) up->right = t->left;
       else up->right = NULL;
     }
-    else (*node)->left = t->left;
+    else {if (flag == 1) (*node)->right = t->left; 
+          else (*node)->left = t->left;
+      }
     free(t);
     printf("Delete Two\n");
     return 1;
