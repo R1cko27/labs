@@ -1,3 +1,14 @@
+/**
+ * @file macros.h
+ * @brief Обработка макросов препроцессора
+ * 
+ * Практическое занятие 4: Бинарные деревья поиска
+ * 
+ * @author Панфилов А.П., Иманкулов С.А.
+ * 
+ * GitHub: https://github.com/R1cko27/labs/tree/main/semester_2/Practice_works/practic_4
+*/
+
 #ifndef MACROS_H
 #define MACROS_H
 
@@ -6,21 +17,25 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_IDENT_LEN 256
-#define MAX_REPLACE_LEN 1024
 
 typedef struct btree {
-    char* identifier;      // идентификатор макроса
-    char* replacement;     // строка замещения
+    char* ident;      // идентификатор макроса
+    char* replace;     // строка замещения
     struct btree* left;
     struct btree* right;
 } btree;
 
+
 // Функции для работы с деревом
 int countNodes(btree* node);
-void Ins_Btree_edit(const char* ident, const char* repl, btree **q);
-int Delete_edit(const char* key, btree **node);
-void freeTree(btree* root);
+void Ins_Btree_edit(char* ident, char* repl, btree **q);
+int Delete_edit(char* ident, btree **q);
 void printTreeInOrder(btree* root);
+void freeTree(btree* root);
 
-#endif // MACROS_H
+// Функции для работы со строчками файла
+void skipspace(char* line, int* pos);
+int skipchars_ident(char* line, int* pos);
+int skipchars_replace(char* line, int* pos);
+
+#endif
