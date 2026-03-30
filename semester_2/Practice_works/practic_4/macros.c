@@ -1,6 +1,12 @@
+/**
+ * @file macros.c
+ * @brief Обработка макросов (#define, #undef) с бинарным деревом
+ * 
+ * Сборка: gcc macros.c -o macros && ./macros test.c
+*/
+
 #include "macros.h"
 #include "modules/export_tree.c"
-// gcc macros.c -o macros && macros test.c
 
 int countNodes(btree *p){
     if (p == NULL){

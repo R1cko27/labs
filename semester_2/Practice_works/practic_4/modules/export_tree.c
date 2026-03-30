@@ -4,7 +4,7 @@
  * 
  * Результат экспорта можно визуализировать на сайте:
  * https://artem.email/tree
- */
+*/
 
 #include "../macros.h"
 #include <string.h>
