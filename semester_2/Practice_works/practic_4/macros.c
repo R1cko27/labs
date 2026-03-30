@@ -3,6 +3,7 @@
  * @brief Обработка макросов (#define, #undef) с бинарным деревом
  * 
  * Сборка: gcc macros.c -o macros && ./macros test.c
+ * GitHub: https://github.com/R1cko27/labs/tree/main/semester_2/Practice_works/practic_4
 */
 
 #include "macros.h"
