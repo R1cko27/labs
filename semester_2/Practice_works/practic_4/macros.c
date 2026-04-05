@@ -118,7 +118,7 @@ int skipchars_ident(char* line, int* pos) {
 
 int skipchars_replace(char* line, int* pos) {
     int i = 0;
-    while (line[*pos] != '\0') {
+    while (line[*pos] != '\0' && !isspace(line[*pos])) {
         (*pos)++;
         i ++;
     }
@@ -167,7 +167,7 @@ int main(int argc, char* argv[]){
                 replace[replaceLen] = '\0';
 
                 Ins_Btree_edit(ident, replace, &root);
-            } 
+            }
             else if (strncmp(line + pos, "undef", 5) == 0){
                 pos += 5;
                 skipspace(line, &pos);
