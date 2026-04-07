@@ -58,7 +58,6 @@ void truncate_and_escape(const char *str, char *output, size_t output_size) {
     char truncated[256];
     int len = strlen(str);
     
-    // Сначала обрезаем строку
     if (len <= 5) {
         strcpy(truncated, str);
     } else {

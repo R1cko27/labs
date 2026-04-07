@@ -1,94 +1,167 @@
-// test_program.c
-// Пример файла для тестирования анализатора макросов
+#include "study_group.h"
+#include "list_structures.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+#define TASK1 1  // Структура (пункт 1)
+#define TASK2 2  // Стек (пункт 2)
+#define TASK3 3  // Множество - set (пункт 3.2)
+#define TASK4 4  // Очередь (пункт 4)
 
-// Простые макросы
-#define PI 3.14159
-#define MAX_SIZE 100
-#define MIN_VALUE 0
 
-// Макросы с параметрами
-#define SQUARE(x) ((x) * (x))
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define CURRENT_TASK TASK4
 
-// Макросы для отладки
-#define DEBUG 1
-#define LOG(msg) printf("[LOG] %s\n", msg)
+#if CURRENT_TASK == TASK1
+int main() {
+    StudyGroup group1, group2, group3, group4;
+    ErrorCode err;
+    
+    init_study_group(&group1, "AB-420", IS, 2024, B);
+    init_study_group(&group2, "AP-527", PI, 2025, M);
+    init_study_group(&group3, "AB-420", IS, 2024, B);
+    err = init_study_group(&group3, "AP-421", IS, 2027, B); // Инициализация с ошибкой
+    if (err != SUCCESS) printf("Ошибка инициализации group3: код %d (неверный год)\n", err);
 
-// Макрос с многострочным определением
-#define SWAP(a, b) do { \
-    typeof(a) temp = (a); \
-    (a) = (b); \
-    (b) = temp; \
-} while(0)
+    print_study_group(&group1);
+    print_study_group(&group2);
+    print_study_group(&group3);
 
-// Определяем макрос для тестирования #undef
-#define TEST_MACRO 12345
-#define TEMP_VALUE 999
-#define OLD_NAME "old_value"
+    // Сравнение групп
+    printf("group1 и group2 равны? %s\n", are_study_groups_equal(&group1, &group2) ? "Да" : "Нет");
+    printf("group1 и group3 равны? %s\n", are_study_groups_equal(&group1, &group3) ? "Да" : "Нет");
+    printf("group1 < group2? %s\n", is_study_group_less(&group1, &group2) ? "Да" : "Нет");
+    return 0;
+}
+
+#elif CURRENT_TASK == TASK2
+int main() {
+    Node* head = NULL;
+    ErrorCode err;
+
+    StudyGroup group1, group2, group3;
+    
+    // Инициализация групп
+    init_study_group(&group1, "AB-420", IS, 2024, B);
+    init_study_group(&group2, "AP-526", PI, 2025, M);
+    init_study_group(&group3, "VT-441", PR, 2024, B);
+    
+    // Добавляем элементы в стек
+    head = push(head, &group1);
+    head = push(head, &group2);
+    head = push(head, &group3);
+    
+    print_list(head);
+    
+    // Удаляем элемент и выводим информацию
+    head = pop(head);
+    print_list(head);
+    
+    delete_list(head);
+    head = NULL;
+    print_list(head);
+    return 0;
+}
+
+#elif CURRENT_TASK == TASK3
 
 int main() {
-    int x = 10;
-    int y = 20;
+    SetNode* set1 = NULL;
+    SetNode* set2 = NULL;
+    ErrorCode err;
     
-    // Используем макросы
-    printf("PI = %f\n", PI);
-    printf("MAX_SIZE = %d\n", MAX_SIZE);
-    printf("SQUARE(5) = %d\n", SQUARE(5));
-    printf("MAX(10, 20) = %d\n", MAX(10, 20));
+    StudyGroup groups[8];
     
-    #ifdef DEBUG
-        LOG("Debug mode enabled");
-    #endif
+    // Инициализация групп
+    init_study_group(&groups[0], "AP-526", PI, 2025, B);
+    init_study_group(&groups[1], "AP-527", PI, 2025, B);
+    init_study_group(&groups[2], "VT-515", VT, 2025, M);
+    init_study_group(&groups[3], "PR-503", PR, 2025, M);
+    init_study_group(&groups[4], "IS-420", IS, 2024, B);
+    init_study_group(&groups[5], "PI-456", PI, 2023, M);
+    init_study_group(&groups[6], "PR-389", PR, 2023, B);
+    init_study_group(&groups[7], "VT-201", VT, 2022, B);
     
-    // Тестируем SWAP
-    printf("Before swap: x=%d, y=%d\n", x, y);
-    SWAP(x, y);
-    printf("After swap: x=%d, y=%d\n", x, y);
+    // 1 мн-во
+    set_insert(&set1, &groups[0]);
+    set_insert(&set1, &groups[1]);
+    set_insert(&set1, &groups[2]);
+    set_insert(&set1, &groups[3]);
+    set_insert(&set1, &groups[4]);
+
+    // 2 мн-во
+    set_insert(&set2, &groups[3]);
+    set_insert(&set2, &groups[4]);
+    set_insert(&set2, &groups[5]);
+    set_insert(&set2, &groups[6]);
+    set_insert(&set2, &groups[7]);
     
-    // Проверяем TEST_MACRO
-    printf("TEST_MACRO = %d\n", TEST_MACRO);
+    printf("\n--- Первое множество ---\n");
+    print_set(set1);
     
-    // Отменяем некоторые макросы
-    #undef TEST_MACRO
-    #undef TEMP_VALUE
-    #undef OLD_NAME
+    printf("--- Второе множество ---\n");
+    print_set(set2);
     
-    // Попытка использовать отмененный макрос (закомментировано, так как вызовет ошибку)
-    // printf("TEST_MACRO = %d\n", TEST_MACRO); // Ошибка: макрос не определен
+    printf("Группа IS-501 %s в первом множестве\n", set_contains(set1, "IS-501") ? "ЕСТЬ" : "ОТСУТСТВУЕТ");
+    printf("Группа IS-501 %s во втором множестве\n", set_contains(set2, "IS-501") ? "ЕСТЬ" : "ОТСУТСТВУЕТ");
+    printf("Группа AB-420 %s в первом множестве\n", set_contains(set1, "AB-420") ? "ЕСТЬ" : "ОТСУТСТВУЕТ");
     
-    // Определяем новый макрос с тем же именем
-    #define TEST_MACRO 54321
-    printf("New TEST_MACRO = %d\n", TEST_MACRO);
+    set_remove(&set1, "VT-515");
+    print_set(set1);
     
-    // Определяем дополнительные макросы после #undef
-    #define NEW_MACRO 777
-    #define ANOTHER_MACRO "another"
+    printf("\n--- Объединение множеств ---\n");
+    SetNode* union_set = set_union(set1, set2);
+    print_set(union_set);
     
-    // Еще один #undef для тестирования удаления из дерева
-    #undef MAX_SIZE
+    printf("--- Пересечение множеств ---\n");
+    SetNode* intersection_set = set_intersection(set1, set2);
+    print_set(intersection_set);
+    
+    delete_set(set1);
+    delete_set(set2);
+    delete_set(union_set);
+    delete_set(intersection_set);
     
     return 0;
 }
 
-// Макросы вне функции main
-#define GLOBAL_MACRO 1000
-#define STRING_MACRO "global string"
+#elif CURRENT_TASK == TASK4
 
-// Макрос с нестандартным именем (должен быть пропущен)
-#define INVALID 456  // Невалидный идентификатор - начинается с цифры
+int main() {
+    QueueNode* queue = NULL;
+    ErrorCode err;
+    StudyGroup groups[5];
+    
+    init_study_group(&groups[0], "AP-524", PI, 2024, B);
+    init_study_group(&groups[1], "IS-501", IS, 2024, B);
+    init_study_group(&groups[2], "VT-515", VT, 2025, M);
+    init_study_group(&groups[3], "PR-503", PR, 2024, M);
+    init_study_group(&groups[4], "AB-420", IS, 2024, B);
+    
+    for (int i = 0; i < 5; i++) {
+        queue = enqueue(queue, &groups[i]);
+        printf("Добавлен элемент %d: %s\n", i + 1, groups[i].group_name);
+    }
 
-// Макрос со сложной заменой
-#define COMPLEX_MACRO(x, y) \
-    do { \
-        int temp = (x) + (y); \
-        printf("Sum: %d\n", temp); \
-    } while(0)
+    print_queue(queue);
+    
+    StudyGroup extracted;
+    for (int i = 0; i < 3; i++) {
+        printf("\nИзвлечение #%d:\n", i + 1);
+        queue = dequeue(queue, &extracted);
+        
+        if (queue != NULL) {
+            printf("Текущее состояние очереди:\n");
+            print_queue(queue);
+        } else {
+            printf("Очередь стала пустой\n");
+        }
+    }
+    print_queue(queue);
+    
+    queue = delete_queue(queue);
+    print_queue(queue);
 
-// Еще один макрос для проверки алфавитного порядка
-#define ALPHA_MACRO 1
-#define BETA_MACRO 2
-#define GAMMA_MACRO 3
-#define ZETA_MACRO 4
+    return 0;
+}
+
+#else
+#error "Неверный номер задачи"
+#endif
