@@ -405,7 +405,7 @@ int main() {
         "AP-226", "AP-326", "AP-426", "AP-526", "AB-220",
         "AB-320", "AB-420", "AB-520", "ABT-241", "ABT-341"
     };
-
+    
     StudyDirection dirs[] = {IS, PI, IS, VT, AI, PR, IS, PI, IS, VT};
     int years[] = {2022, 2023, 2024, 2025, 2022, 2023, 2024, 2025, 2022, 2023};
     EducationLevel levels[] = {B, B, B, M, B, B, B, B, B, B};
@@ -435,7 +435,7 @@ int main() {
     StudyGroup read_groups[10];
     char line[256];
     int read_count = 0;
-
+        
     while (fgets(line, sizeof(line), file) != NULL && read_count < 10) {
         line[strcspn(line, "\n")] = 0;
         char* token = strtok(line, ";");
