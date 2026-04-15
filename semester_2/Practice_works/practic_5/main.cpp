@@ -3,7 +3,7 @@
 int main() {
     // Создаем группу 1 с заданными значениями
     StudentGroup group1("AP-526", PI, 2025, BACHELOR);
-
+    
     // Проверяем и выводим информацию о группе
     if (StudentGroup::validate_group(group1)) {
         group1.print();

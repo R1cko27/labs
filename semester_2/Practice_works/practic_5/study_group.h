@@ -19,12 +19,12 @@ private:
     EducationLevel level;         // Уровень подготовки (бакалавр/магистр)
 
 public:
-    // Конструктор с параметрами по умолчанию
-    StudentGroup(const std::string& name = "Group A", 
-                StudyDirection dir = PI, 
-                int year = 2025, 
-                EducationLevel lvl = BACHELOR);
-
+    // Конструктор
+    StudentGroup(const std::string& name, 
+                StudyDirection dir, 
+                int year, 
+                EducationLevel lvl);
+    StudentGroup();
     // Метод для печати информации о группе
     void print() const;
 

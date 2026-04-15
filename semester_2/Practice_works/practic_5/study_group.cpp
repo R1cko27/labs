@@ -1,10 +1,18 @@
 ﻿#include "study_group.h"
 
-// Конструктор с параметрами по умолчанию
+// Конструктор с валидацией
 StudentGroup::StudentGroup(const std::string& name, StudyDirection dir, int year, EducationLevel lvl)
-    : groupName(name), direction(dir), enrollmentYear(year), level(lvl) {}
+    : groupName(name), direction(dir), enrollmentYear(year), level(lvl) 
+{
+    if (!validate_group(*this)) {
+        throw std::invalid_argument("Некорректные данные группы");
+    }
+}
 
-// Метод для печати информации о группе
+StudentGroup::StudentGroup() 
+    : groupName("AP-526"), direction(PI), enrollmentYear(2025), level(BACHELOR) {}
+
+
 void StudentGroup::print() const {
     std::cout << "Название группы: " << groupName << std::endl;
     
@@ -21,15 +29,11 @@ void StudentGroup::print() const {
 
     std::cout << "Направление: " << direction_str << std::endl;
     std::cout << "Год набора: " << enrollmentYear << std::endl;
-
-    // Печать уровня
     std::string level_str = (level == BACHELOR) ? "Бакалавр" : "Магистр";
     std::cout << "Уровень подготовки: " << level_str << std::endl;
 }
 
-// Метод для валидации данных группы
 bool StudentGroup::validate_group(const StudentGroup& group) {
-    // Проверка имени группы (минимум 5 символов, с дефисом и цифрами в конце)
     if (group.groupName.size() < 5) return false;
     if (group.groupName.find('-') == std::string::npos) return false;
 
