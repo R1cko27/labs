@@ -1,22 +1,38 @@
-#ifndef STUDY_GROUP_H
+﻿#ifndef STUDY_GROUP_H
 #define STUDY_GROUP_H
 
+#include <iostream>
+#include <string>
+#include <stdexcept>
+#include <ctime>
 
-typedef enum { B, M, DEFAULT_LVL } EducationLevel;
-typedef enum { IS, PI, AI, PR, VT, DEFAULT_DIR } StudyDirection;
+// Перечисления для уровня образования и направления
+enum EducationLevel { BACHELOR, MASTER };
+enum StudyDirection { IS, PI, AI, PR, VT };
 
-class StudyGroup {
-    private:
-        char group_name[10];
-        StudyDirection direction;
-        int enrollment_year;
-        EducationLevel level;
+// Класс для учебной группы
+class StudentGroup {
+private:
+    std::string groupName;        // Название группы
+    StudyDirection direction;     // Направление обучения
+    int enrollmentYear;           // Год набора
+    EducationLevel level;         // Уровень подготовки (бакалавр/магистр)
 
-    public:
-        StudyGroup(const char* group_name, StudyDirection direction, int enrollment_year, EducationLevel level);
+public:
+    // Конструктор с параметрами по умолчанию
+    StudentGroup(const std::string& name = "Group A", 
+                StudyDirection dir = PI, 
+                int year = 2025, 
+                EducationLevel lvl = BACHELOR);
 
-        void print() const;
+    // Метод для печати информации о группе
+    void print() const;
+
+    // Метод для проверки корректности данных
+    static bool validate_group(const StudentGroup& group);
+
+    // Метод для изменения названия группы
+    void rename(const std::string& newGroupName);
 };
-
 
 #endif
