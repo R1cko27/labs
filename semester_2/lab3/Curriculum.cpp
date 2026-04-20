@@ -1,8 +1,12 @@
 #include "Curriculum.h"
+
 #include <stdexcept>
 #include <iostream>
 #include <regex>
 #include <cctype>
+#include <string>
+#include <vector>
+#include <sstream>
 
 void checkNonNegative(int value, const std::string& fieldName) {
     if (value < 0) {
@@ -10,6 +14,39 @@ void checkNonNegative(int value, const std::string& fieldName) {
     }
 }
 
+std::vector<std::string> Curriculum::validateInstance() const {
+    std::vector<std::string> errors;
+    
+    std::regex codePattern(R"(^\d{2}\.\d{2}\.\d{2}$)");
+    if (!std::regex_match(code, codePattern)) 
+        errors.push_back("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX");
+
+    if (title.empty()) errors.push_back("Название учебной программы не может быть пустым.");
+    
+    if (responsiblePerson.empty()) errors.push_back("ФИО ответственного не может быть пустым.");
+    
+    if (targetCredits < 0) errors.push_back("Зачетные единицы не могут быть отрицательными.");
+    
+    if (targetCredits == 0) errors.push_back("Целевое количество зачётных единиц не может быть нулевым.");
+    
+    if (targetCredits > 500) errors.push_back("Целевые зачётные единицы превышают разумный максимум (500).");
+    
+    return errors;
+}
+
+// Конструктор по умолчанию
+Curriculum::Curriculum() 
+    : code("00.00.00"), 
+      title("Новый учебный план"), 
+      responsiblePerson("Не назначен"), 
+      targetCredits(1), 
+      level(DegreeLevel::BACHELOR), 
+      disciplineCount(0), 
+      totalDisciplineCredits(0), 
+      currentState(State::EDITING) 
+{}
+
+// Конструктор с параметрами
 Curriculum::Curriculum(const std::string& code, 
                        const std::string& title, 
                        const std::string& responsiblePerson, 
@@ -19,31 +56,14 @@ Curriculum::Curriculum(const std::string& code,
       targetCredits(targetCredits), level(level), 
       disciplineCount(0), totalDisciplineCredits(0), currentState(State::EDITING) 
 {
-    // Проверка шифра
-    std::regex codePattern(R"(^\d{1,2}\.\d{1,2}\.\d{2,3}$)");
-    if (!std::regex_match(code, codePattern)) {
-        throw std::invalid_argument(
-            "Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX\n");
-    }
-
-    // Проверка названия
-    if (title.empty()) {
-        throw std::invalid_argument("Название учебной программы не может быть пустым.");
-    }
-
-    // Проверка целевого количества зачётных единиц
-    if (targetCredits < 0) {
-        throw std::invalid_argument("Зачетные еденицы не могут быть отрицательными.");
-    }
-    
-    // Проверка на нулевое значение
-    if (targetCredits == 0) {
-        throw std::invalid_argument("Целевое количество зачётных единиц не может быть нулевым. ");
-    }
-
-    // Проверка на разумный максимум
-    if (targetCredits > 500) {
-        throw std::invalid_argument("Целевые зачётные единицы превышают разумный максимум (500).");
+    auto errors = validateInstance();
+    if (!errors.empty()) {
+        std::ostringstream oss;
+        oss << "Ошибки валидации:\n";
+        for (size_t i = 0; i < errors.size(); ++i) {
+            oss << (i + 1) << ". " << errors[i] << "\n";
+        }
+        throw std::invalid_argument(oss.str());
     }
 }
 
@@ -56,28 +76,35 @@ void Curriculum::validateState() const {
 std::string Curriculum::getCode() const { return code; }
 void Curriculum::setCode(const std::string& newCode) {
     validateState();
-    if (newCode.empty()) throw std::invalid_argument("Код не может быть пустым.");
+    std::regex codePattern(R"(^\d{1,2}\.\d{1,2}\.\d{2,3}$)");
+    if (!std::regex_match(newCode, codePattern)) 
+        throw std::invalid_argument("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX");
     code = newCode;
 }
 
 std::string Curriculum::getTitle() const { return title; }
 void Curriculum::setTitle(const std::string& newTitle) {
     validateState();
-    if (newTitle.empty()) throw std::invalid_argument("Название не может быть пустым.");
+    if (newTitle.empty()) throw std::invalid_argument("Название учебной программы не может быть пустым.");
     title = newTitle;
 }
 
 std::string Curriculum::getResponsiblePerson() const { return responsiblePerson; }
 void Curriculum::setResponsiblePerson(const std::string& newPerson) {
     validateState();
-    if (newPerson.empty()) throw std::invalid_argument("ФИО ответственного не может быть пустым.");
+    if (newPerson.empty()) 
+        throw std::invalid_argument("ФИО ответственного не может быть пустым.");
     responsiblePerson = newPerson;
 }
+
 
 int Curriculum::getTargetCredits() const { return targetCredits; }
 void Curriculum::setTargetCredits(int newTarget) {
     validateState();
-    checkNonNegative(newTarget, "Target credits");
+    if (newTarget < 0) throw std::invalid_argument("Зачетные единицы не могут быть отрицательными.");
+    if (newTarget == 0) throw std::invalid_argument("Целевое количество зачётных единиц не может быть нулевым.");
+    if (newTarget > 500) throw std::invalid_argument("Целевые зачётные единицы превышают разумный максимум (500).");
+    
     targetCredits = newTarget;
 }
 
@@ -98,14 +125,11 @@ std::string Curriculum::getDegreeLevelString() const {
 
 void Curriculum::setDisciplinesInfo(int count, int totalCredits) {
     validateState();
-    checkNonNegative(count, "Количество дисциплин");
-    checkNonNegative(totalCredits, "Суммарное количество зачётных единиц");
-    
-    // "Количество дисциплин и суммарное количество зачётных единиц за них могут быть равны 0 только одновременно."
-    if ((count == 0 && totalCredits != 0) || (count != 0 && totalCredits == 0)) {
+    if (count < 0) throw std::invalid_argument("Количество дисциплин не может быть отрицательным.");
+    if (totalCredits < 0) throw std::invalid_argument("Суммарное количество зачётных единиц не может быть отрицательным.");
+    if ((count == 0 && totalCredits != 0) || (count != 0 && totalCredits == 0)) 
         throw std::invalid_argument("Количество дисциплин и суммарное количество зачётных единиц за них должны быть равны 0 одновременно.");
-    }
-    
+
     disciplineCount = count;
     totalDisciplineCredits = totalCredits;
 }
@@ -118,13 +142,29 @@ std::string Curriculum::getStateString() const {
     return (currentState == State::EDITING) ? "Редактирование" : "Активен";
 }
 
-// Ввести план в действие
 bool Curriculum::activate() {
-    if (currentState == State::ACTIVE) return true;
-
-    if (code.empty() || title.empty() || responsiblePerson.empty()) return false;
-
-    if (totalDisciplineCredits != targetCredits) return false;
+    validateState();
+    
+    std::vector<std::string> errors;
+    
+    // Проверка соответствия кредитов
+    if (totalDisciplineCredits != targetCredits) 
+        errors.push_back("Сумма ЗЕ дисциплин (" + std::to_string(totalDisciplineCredits) + 
+                        ") не равна целевым ЗЕ (" + std::to_string(targetCredits) + ")");
+    
+    if ((disciplineCount == 0 && totalDisciplineCredits != 0) || 
+        (disciplineCount != 0 && totalDisciplineCredits == 0)) 
+        errors.push_back("Количество дисциплин и суммарное количество ЗЕ должны быть равны 0 одновременно");
+    
+    if (targetCredits > 0 && disciplineCount == 0) errors.push_back("Нельзя активировать план без дисциплин");
+    
+    if (!errors.empty()) {
+        std::cout << "\nОшибка активации учебного плана:\n";
+        for (size_t i = 0; i < errors.size(); ++i) {
+            std::cout << (i + 1) << ". " << errors[i] << std::endl;
+        }
+        return false;
+    }
     
     currentState = State::ACTIVE;
     return true;

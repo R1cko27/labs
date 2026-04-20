@@ -2,6 +2,7 @@
 #define CURRICULUM_H
 
 #include <string>
+#include <vector>
 
 class Curriculum {
     public:
@@ -11,7 +12,6 @@ class Curriculum {
             POSTGRADUATE
         };
 
-        // Перечисление для состояния
         enum class State {
             EDITING,
             ACTIVE
@@ -28,8 +28,10 @@ class Curriculum {
         State currentState;             // состояние
 
         void validateState() const;
+        std::vector<std::string> validateInstance() const;
 
     public:
+        Curriculum();
         Curriculum(const std::string& code, const std::string& title, const std::string& responsiblePerson, int targetCredits, DegreeLevel level);
 
         std::string getCode() const;
@@ -45,23 +47,17 @@ class Curriculum {
         void setTargetCredits(int newTarget);
 
         DegreeLevel getDegreeLevel() const;
-        void setDegreeLevel(DegreeLevel newLevel);
-        
         std::string getDegreeLevelString() const;
-
-        // Количество дисциплин и суммарное количество ЗЕ
+        void setDegreeLevel(DegreeLevel newLevel);
+    
         void setDisciplinesInfo(int count, int totalCredits);
-
-        // Получение информации о дисциплинах
         int getDisciplineCount() const;
         int getTotalDisciplineCredits() const;
 
-        // Состояние
         State getState() const;
         std::string getStateString() const;
 
-        // Ввести план в действие (с проверкой условий)
         bool activate();
     };
 
-#endif // CURRICULUM_H
+#endif
