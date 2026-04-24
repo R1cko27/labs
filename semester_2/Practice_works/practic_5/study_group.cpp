@@ -1,58 +1,95 @@
 ﻿#include "study_group.h"
 
-// Конструктор с валидацией
-StudentGroup::StudentGroup(const std::string& name, StudyDirection dir, int year, EducationLevel lvl)
-    : groupName(name), direction(dir), enrollmentYear(year), level(lvl) 
-{
-    if (!validate_group(*this)) {
-        throw std::invalid_argument("Некорректные данные группы");
+#include <ctime>
+#include <iostream>
+#include <limits>
+#include <new>
+#include <stdexcept>
+
+int currentYear() {
+    const std::time_t now = std::time(nullptr);
+    const std::tm local = *std::localtime(&now);
+    return local.tm_year + 1900;
+}
+
+const char* toString(StudyDirection dir) {
+    switch (dir) {
+        case StudyDirection::IS: return "Информационная безопасность";
+        case StudyDirection::PI: return "Прикладная информатика";
+        case StudyDirection::AI: return "Приборостроение";
+        case StudyDirection::PR: return "Программная инженерия";
+        case StudyDirection::VT: return "Вычислительная техника";
+        default: return "Неизвестное направление";
     }
 }
 
-StudentGroup::StudentGroup() 
-    : groupName("AP-526"), direction(PI), enrollmentYear(2025), level(BACHELOR) {}
+const char* toString(EducationLevel lvl) {
+    switch (lvl) {
+        case EducationLevel::Bachelor: return "Бакалавр";
+        case EducationLevel::Master: return "Магистр";
+        default: return "Неизвестный уровень";
+    }
+}
 
+bool isDirectionValueValid(int raw) {
+    return raw >= static_cast<int>(StudyDirection::IS) && raw <= static_cast<int>(StudyDirection::VT);
+}
+
+bool isLevelValueValid(int raw) {
+    return raw == static_cast<int>(EducationLevel::Bachelor) ||
+           raw == static_cast<int>(EducationLevel::Master);
+}
+
+void StudentGroup::init(const std::string& name, StudyDirection dir, int year, EducationLevel lvl) {
+    if (name.size() < 5 || name.find('-') == std::string::npos) 
+        throw std::invalid_argument("Некорректное название группы: минимум 5 символов и дефис обязательны");
+    
+    const int dirValue = static_cast<int>(dir);
+    if (!isDirectionValueValid(dirValue)) throw std::out_of_range("Некорректное направление обучения");
+
+    const int thisYear = currentYear();
+    if (year < thisYear - 8 || year > thisYear) throw std::out_of_range("Некорректный год набора");
+    
+    const int levelValue = static_cast<int>(lvl);
+    if (!isLevelValueValid(levelValue)) throw std::out_of_range("Некорректный уровень образования");
+
+    groupName = name;
+    direction = dir;
+    enrollmentYear = year;
+    level = lvl;
+}
+
+StudentGroup::StudentGroup(const std::string& name, StudyDirection dir, int year, EducationLevel lvl) {
+    init(name, dir, year, lvl);
+}
+
+StudentGroup::StudentGroup(const StudentGroup& other)
+    : groupName(other.groupName),
+      direction(other.direction),
+      enrollmentYear(other.enrollmentYear),
+      level(other.level) {}
 
 void StudentGroup::print() const {
-    std::cout << "Название группы: " << groupName << std::endl;
-    
-    // Печать направления
-    std::string direction_str;
-    switch (direction) {
-        case IS: direction_str = "Информационная безопасность"; break;
-        case PI: direction_str = "Прикладная информатика"; break;
-        case AI: direction_str = "Приборостроение"; break;
-        case PR: direction_str = "Программная инженерия"; break;
-        case VT: direction_str = "Вычислительная техника"; break;
-        default: direction_str = "Неизвестное направление"; break;
-    }
-
-    std::cout << "Направление: " << direction_str << std::endl;
-    std::cout << "Год набора: " << enrollmentYear << std::endl;
-    std::string level_str = (level == BACHELOR) ? "Бакалавр" : "Магистр";
-    std::cout << "Уровень подготовки: " << level_str << std::endl;
+    std::cout << "Название группы: " << groupName << '\n'
+              << "Направление: " << toString(direction) << '\n'
+              << "Год набора: " << enrollmentYear << '\n'
+              << "Уровень подготовки: " << toString(level) << '\n';
 }
 
-bool StudentGroup::validate_group(const StudentGroup& group) {
-    if (group.groupName.size() < 5) return false;
-    if (group.groupName.find('-') == std::string::npos) return false;
-
-    // Проверка направления
-    if (group.direction < IS || group.direction > VT) return false;
-
-    // Проверка года набора
-    time_t t = time(nullptr);
-    struct tm tm = *localtime(&t);
-    int current_year = tm.tm_year + 1900;
-    if (group.enrollmentYear < current_year - 8 || group.enrollmentYear > current_year) return false;
-
-    // Проверка уровня подготовки
-    if (group.level != BACHELOR && group.level != MASTER) return false;
-
-    return true;
-}
-
-// Метод для переименования группы
 void StudentGroup::rename(const std::string& newGroupName) {
-    groupName = newGroupName;
+    init(newGroupName, direction, enrollmentYear, level);
 }
+
+StudentGroup* createGroup(const std::string& name,
+                          StudyDirection dir,
+                          int year,
+                          EducationLevel lvl,
+                          std::ostream& out) {
+    try {
+        return new StudentGroup(name, dir, year, lvl);
+    } catch (const std::bad_alloc&) {
+        out << "Не удалось выделить память для объекта\n";
+        return nullptr;
+    }
+}
+

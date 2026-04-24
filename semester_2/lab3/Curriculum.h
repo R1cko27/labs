@@ -58,6 +58,6 @@ class Curriculum {
         std::string getStateString() const;
 
         bool activate();
-    };
+};
 
 #endif

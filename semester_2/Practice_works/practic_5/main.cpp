@@ -1,33 +1,41 @@
 ﻿#include "study_group.h"
 
+#include <exception>
+#include <iostream>
+
 int main() {
-    // Создаем группу 1 с заданными значениями
-    StudentGroup group1("AP-526", PI, 2025, BACHELOR);
-    
-    // Проверяем и выводим информацию о группе
-    if (StudentGroup::validate_group(group1)) {
+    try {
+        StudentGroup group1;
+        StudentGroup group2("AP-526", StudyDirection::PI, 2025, EducationLevel::Bachelor);
+        StudentGroup group3("AB-420", StudyDirection::IS, 2024, EducationLevel::Bachelor);
+
         group1.print();
-    } else {
-        std::cout << "Некорректные данные для группы 1" << std::endl;
-    }
-
-    // Создаем группу 2 с другими значениями
-    StudentGroup group2("AB-420", IS, 2024, MASTER);
-
-    // Проверяем и выводим информацию о группе
-    if (StudentGroup::validate_group(group2)) {
         group2.print();
-    } else {
-        std::cout << "Некорректные данные для группы 2" << std::endl;
+        group3.print();
+
+        StudentGroup group4(group2); // group4 - копия group2
+        group4.print();
+
+        group2.rename("AP-527");
+        group2.print();
+
+        // Динамическая память
+        StudentGroup* dynamicA = createGroup("AI-226", StudyDirection::AI, 2022, EducationLevel::Bachelor);
+        StudentGroup* dynamicB = createGroup("VT-525", StudyDirection::VT, 2025, EducationLevel::Master);
+
+        if (dynamicA != nullptr) dynamicA->print();
+        else std::cout << "Объект A не создан\n";
+        
+        if (dynamicB != nullptr) dynamicB->print();
+        else std::cout << "Объект B не создан\n";
+
+        delete dynamicA;
+        delete dynamicB;
+        
+    } catch (const std::exception& ex) {
+        std::cout << "Неизвестная ошибка: " << ex.what() << '\n';
+        return 1;
     }
-
-    // Копируем группу 1 в группу 3
-    StudentGroup group3 = group1;
-    group3.print();
-
-    // Переименовываем группу 1
-    group1.rename("AP-527");
-    group1.print();
 
     return 0;
 }

@@ -19,7 +19,7 @@ std::vector<std::string> Curriculum::validateInstance() const {
     
     std::regex codePattern(R"(^\d{2}\.\d{2}\.\d{2}$)");
     if (!std::regex_match(code, codePattern)) 
-        errors.push_back("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX");
+        errors.push_back("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XX");
 
     if (title.empty()) errors.push_back("Название учебной программы не может быть пустым.");
     
@@ -36,7 +36,7 @@ std::vector<std::string> Curriculum::validateInstance() const {
 
 // Конструктор по умолчанию
 Curriculum::Curriculum() 
-    : code("00.00.00"), 
+    : code("00.00.00"),
       title("Новый учебный план"), 
       responsiblePerson("Не назначен"), 
       targetCredits(1), 
@@ -76,9 +76,9 @@ void Curriculum::validateState() const {
 std::string Curriculum::getCode() const { return code; }
 void Curriculum::setCode(const std::string& newCode) {
     validateState();
-    std::regex codePattern(R"(^\d{1,2}\.\d{1,2}\.\d{2,3}$)");
+    std::regex codePattern(R"(^\d{2}\.\d{2}\.\d{2}$)");
     if (!std::regex_match(newCode, codePattern)) 
-        throw std::invalid_argument("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX");
+        throw std::invalid_argument("Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XX");
     code = newCode;
 }
 
