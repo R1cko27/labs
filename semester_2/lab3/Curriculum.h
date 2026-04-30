@@ -1,8 +1,7 @@
-#ifndef CURRICULUM_H
+﻿#ifndef CURRICULUM_H
 #define CURRICULUM_H
 
 #include <string>
-#include <vector>
 
 class Curriculum {
     public:
@@ -11,12 +10,10 @@ class Curriculum {
             MASTER,
             POSTGRADUATE
         };
-
         enum class State {
             EDITING,
             ACTIVE
         };
-
     private:
         std::string code;               // шифр
         std::string title;              // название
@@ -28,18 +25,19 @@ class Curriculum {
         State currentState;             // состояние
 
         void validateState() const;
-        std::vector<std::string> validateInstance() const;
+        void validateInstance(std::string errors[], int& errorCount) const;
 
     public:
         Curriculum();
-        Curriculum(const std::string& code, const std::string& title, const std::string& responsiblePerson, int targetCredits, DegreeLevel level);
+        Curriculum(const std::string& code, const std::string& title,
+                   const std::string& responsiblePerson, int targetCredits, DegreeLevel level);
 
         std::string getCode() const;
         void setCode(const std::string& newCode);
 
         std::string getTitle() const;
         void setTitle(const std::string& newTitle);
-        
+
         std::string getResponsiblePerson() const;
         void setResponsiblePerson(const std::string& newPerson);
 
@@ -49,7 +47,7 @@ class Curriculum {
         DegreeLevel getDegreeLevel() const;
         std::string getDegreeLevelString() const;
         void setDegreeLevel(DegreeLevel newLevel);
-    
+
         void setDisciplinesInfo(int count, int totalCredits);
         int getDisciplineCount() const;
         int getTotalDisciplineCredits() const;
@@ -58,6 +56,6 @@ class Curriculum {
         std::string getStateString() const;
 
         bool activate();
-    };
+};
 
 #endif

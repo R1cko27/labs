@@ -1,38 +1,42 @@
 ﻿#ifndef STUDY_GROUP_H
 #define STUDY_GROUP_H
 
+#include <iosfwd>
 #include <iostream>
 #include <string>
-#include <stdexcept>
-#include <ctime>
 
-// Перечисления для уровня образования и направления
-enum EducationLevel { BACHELOR, MASTER };
-enum StudyDirection { IS, PI, AI, PR, VT };
+// Уровень образования.
+enum class EducationLevel {
+    Bachelor, Master
+};
 
-// Класс для учебной группы
+// Направление обучения.
+enum class StudyDirection {
+    IS, PI, AI, PR, VT
+};
+
 class StudentGroup {
 private:
-    std::string groupName;        // Название группы
-    StudyDirection direction;     // Направление обучения
-    int enrollmentYear;           // Год набора
-    EducationLevel level;         // Уровень подготовки (бакалавр/магистр)
+    std::string groupName;
+    StudyDirection direction;
+    int enrollmentYear;
+    EducationLevel level;
+
+    void init(const std::string& name, StudyDirection dir, int year, EducationLevel lvl);
 
 public:
-    // Конструктор
-    StudentGroup(const std::string& name, 
-                StudyDirection dir, 
-                int year, 
-                EducationLevel lvl);
-    StudentGroup();
-    // Метод для печати информации о группе
+    StudentGroup(const std::string& name = "AP-000",
+                StudyDirection dir = StudyDirection::PI,
+                int year = 2020,
+                EducationLevel lvl = EducationLevel::Bachelor);
+
+    StudentGroup(const StudentGroup& other);
+
     void print() const;
-
-    // Метод для проверки корректности данных
-    static bool validate_group(const StudentGroup& group);
-
-    // Метод для изменения названия группы
     void rename(const std::string& newGroupName);
 };
 
+StudentGroup* createGroup(const std::string& name, StudyDirection dir, int year, EducationLevel lvl, std::ostream& out = std::cout);
+
 #endif
+

@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <iomanip>
 #include <stdexcept>
 #include "Curriculum.h"
@@ -16,7 +16,7 @@ void printCurriculumInfo(const Curriculum& c) {
 
 int main() {
     try {
-        Curriculum invalidPlan("недействительная_группа", "", "Панфилов А.П.", -1, Curriculum::DegreeLevel::BACHELOR);
+        Curriculum invalidPlan("недействительная_группа", "", "Панфилов А.П..", -1, Curriculum::DegreeLevel::BACHELOR);
     } catch (const std::invalid_argument& e) {
         std::cout << "Перехваченное исключение:\n" << e.what() << std::endl;
     }
@@ -24,7 +24,7 @@ int main() {
         Curriculum plan0;
         printCurriculumInfo(plan0);
 
-        Curriculum plan("10.03.01", "Информационная Безопасность", "Панфилов А.П.", 240, Curriculum::DegreeLevel::BACHELOR);
+        Curriculum plan("10.03.01", "Информационная безопасность", "Панфилов А.П.", 240, Curriculum::DegreeLevel::BACHELOR);
         printCurriculumInfo(plan);
 
         plan.setCode("2.22.02");
@@ -40,17 +40,17 @@ int main() {
 
         printCurriculumInfo(plan);
 
-        Curriculum plan2("09.03.03", "Прикладная информатика", "Имнакулов С.А.", 120, Curriculum::DegreeLevel::MASTER);
+        Curriculum plan2("09.03.03", "Прикладная информатика", "Имнакулов С.А.", 245, Curriculum::DegreeLevel::MASTER);
         plan2.activate();
 
         // Проверка правила "могут быть равны 0 только одновременно"
         try {
-            plan2.setDisciplinesInfo(0, 10);
+            plan2.setDisciplinesInfo(0, 245);
         } catch (const std::invalid_argument& e) {
             std::cout << "\nПерехваченное исключение при установки дисциплин: " << e.what() << std::endl;
         }   
 
-        plan2.setDisciplinesInfo(30, 120);
+        plan2.setDisciplinesInfo(30, 245);
         plan2.activate();
 
         printCurriculumInfo(plan2);
