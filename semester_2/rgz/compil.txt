@@ -1,0 +1,3 @@
+g++ main.cpp OfficeEquipment.cpp Printer.cpp Fax.cpp -std=c++14 -o main
+
+C:\Windows\System32\chcp.com 65001

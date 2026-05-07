@@ -39,4 +39,7 @@ public:
 StudentGroup* createGroup(const std::string& name, StudyDirection dir, int year, EducationLevel lvl, std::ostream& out = std::cout);
 
 #endif
+<<<<<<< HEAD
 
+=======
+>>>>>>> a34c5f65c5ff711a1b1712897025384e4ca02c5a
