@@ -17,11 +17,11 @@ private:
 
 public:
     Fax();
-    Fax(const std::string& model, const std::string& manufacturer, int year, double price,
+    Fax(const std::string& model, Manufacturer manufacturer, int year, double price,
         int transmissionSpeed, int scanResolution, int memoryPages, bool autoFeeder,
         AutoFeederType autoFeederType, Interface interfaces, ApplicationArea applicationArea);
     ~Fax();
-    
+
     AutoFeederType getAutoFeederType() const;
     Interface getInterfaces() const;
     ApplicationArea getApplicationArea() const;
@@ -37,11 +37,15 @@ public:
     void setScanResolutionDPI(int resolutionDPI);
     void setMemoryCapacityPages(int pages);
     void setHasAutomaticFeeder(bool autoFeeder);
-
+    
     std::string toString() const override;
 
-
     friend std::ostream& operator<<(std::ostream& os, const Fax& fax);
+    
+    // Статические методы валидации
+    static bool validateTransmissionSpeed(int speed);
+    static bool validateScanResolution(int resolution);
+    static bool validateMemoryCapacity(int pages);
 };
 
 #endif

@@ -1,3 +1,5 @@
-g++ main.cpp OfficeEquipment.cpp Printer.cpp Fax.cpp -std=c++14 -o main
+g++ main.cpp OfficeEquipment.cpp Printer.cpp Fax.cpp input_valid.cpp -std=c++14 -o main
+
+g++ main2.cpp OfficeEquipment.cpp Printer.cpp Fax.cpp input_valid.cpp -std=c++14 -o main2
 
 C:\Windows\System32\chcp.com 65001
