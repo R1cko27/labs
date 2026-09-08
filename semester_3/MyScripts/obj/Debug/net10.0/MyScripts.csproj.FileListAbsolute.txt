@@ -1,0 +1,15 @@
+D:\all_labs_main\labs\semester_3\MyScripts\bin\Debug\net10.0\MyScripts.exe
+D:\all_labs_main\labs\semester_3\MyScripts\bin\Debug\net10.0\MyScripts.deps.json
+D:\all_labs_main\labs\semester_3\MyScripts\bin\Debug\net10.0\MyScripts.runtimeconfig.json
+D:\all_labs_main\labs\semester_3\MyScripts\bin\Debug\net10.0\MyScripts.dll
+D:\all_labs_main\labs\semester_3\MyScripts\bin\Debug\net10.0\MyScripts.pdb
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.GeneratedMSBuildEditorConfig.editorconfig
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.AssemblyInfoInputs.cache
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.AssemblyInfo.cs
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.csproj.CoreCompileInputs.cache
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.sourcelink.json
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.dll
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\refint\MyScripts.dll
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.pdb
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\MyScripts.genruntimeconfig.cache
+D:\all_labs_main\labs\semester_3\MyScripts\obj\Debug\net10.0\ref\MyScripts.dll

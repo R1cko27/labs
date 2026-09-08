@@ -1,0 +1,5 @@
+g++ -o app.exe main.cpp DatabaseGUI.cpp DatabaseManager.cpp OfficeEquipment.cpp Fax.cpp Printer.cpp input_valid.cpp -lsqlite3 -lcomctl32 -lgdi32 -mwindows
+
+
+
+g++ -o app.exe main.cpp DatabaseGUI.cpp DatabaseManager.cpp OfficeEquipment.cpp Fax.cpp Printer.cpp input_valid.cpp DatabaseUI.cpp lib/sqlite3 -lsqlite3 -lcomctl32 -lgdi32 -mwindows

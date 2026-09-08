@@ -1,0 +1,25 @@
+Стандартные исключения (в <stdexcept>):
+
+std::logic_error (ошибки, обнаруживаемые до выполнения):
+
+std::invalid_argument — неверный аргумент.
+
+std::domain_error — значение вне допустимой области.
+
+std::length_error — превышение максимальной длины.
+
+std::out_of_range — выход за пределы (например, vector::at()).
+
+std::runtime_error (ошибки, обнаруживаемые во время выполнения):
+
+std::range_error — ошибка диапазона при вычислениях.
+
+std::overflow_error / std::underflow_error — переполнение.
+
+std::bad_alloc — ошибка выделения памяти (new).
+
+std::bad_cast — ошибка dynamic_cast.
+
+std::bad_typeid — ошибка typeid с нулевым указателем.
+
+std::bad_function_call — вызов пустого std::function.

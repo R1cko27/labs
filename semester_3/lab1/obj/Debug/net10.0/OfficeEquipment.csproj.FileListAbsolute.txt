@@ -1,0 +1,15 @@
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.GeneratedMSBuildEditorConfig.editorconfig
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.AssemblyInfoInputs.cache
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.AssemblyInfo.cs
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.csproj.CoreCompileInputs.cache
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.sourcelink.json
+D:\all_labs_main\labs\semester_3\lab1\bin\Debug\net10.0\OfficeEquipment.exe
+D:\all_labs_main\labs\semester_3\lab1\bin\Debug\net10.0\OfficeEquipment.deps.json
+D:\all_labs_main\labs\semester_3\lab1\bin\Debug\net10.0\OfficeEquipment.runtimeconfig.json
+D:\all_labs_main\labs\semester_3\lab1\bin\Debug\net10.0\OfficeEquipment.dll
+D:\all_labs_main\labs\semester_3\lab1\bin\Debug\net10.0\OfficeEquipment.pdb
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.dll
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\refint\OfficeEquipment.dll
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.pdb
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\OfficeEquipment.genruntimeconfig.cache
+D:\all_labs_main\labs\semester_3\lab1\obj\Debug\net10.0\ref\OfficeEquipment.dll
