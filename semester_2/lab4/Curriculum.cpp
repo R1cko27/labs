@@ -4,8 +4,11 @@
 #include <regex>
 #include <string>
 #include <sstream>
+<<<<<<< HEAD
 #include <algorithm>
 #include <iomanip>
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
 bool isValidCodeFormat(const std::string& code) {
     std::regex format(R"(^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$)");
@@ -17,15 +20,25 @@ bool isValidCodeFormat(const std::string& code) {
     int group = std::stoi(match[2].str());
     int specialty = std::stoi(match[3].str());
 
+<<<<<<< HEAD
     if (area < Curriculum::MIN_CODE_AREA || area > Curriculum::MAX_CODE_AREA) return false;
     if (group < Curriculum::MIN_CODE_GROUP || group > Curriculum::MAX_CODE_GROUP) return false;
     if (specialty < Curriculum::MIN_CODE_SPECIALTY || specialty > Curriculum::MAX_CODE_SPECIALTY) return false;
+=======
+    if (area < 1 || area > 40) return false;
+    if (group < 1 || group > 9) return false;
+    if (specialty < 1 || specialty > 9) return false;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
     return true;
 }
 
 bool isValidTitle(const std::string& title) {
+<<<<<<< HEAD
     if (title.length() < Curriculum::MIN_TITLE_LENGTH || title.length() > Curriculum::MAX_TITLE_LENGTH) return false;
+=======
+    if (title.length() < 5 || title.length() > 100) return false;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     for (char c : title) {
         if (c == '!' || c == '@' || c == '#' || c == '$' || c == '%' ||
             c == '^' || c == '&' || c == '*' || c == '+' || c == '=' ||
@@ -54,7 +67,11 @@ static std::string responsiblePersonToString(Curriculum::ResponsiblePerson perso
 }
 
 void Curriculum::validateSemester(int semester) const {
+<<<<<<< HEAD
     if (semester < MIN_SEMESTER_COUNT || semester > semesterCount) {
+=======
+    if (semester < 1 || semester > semesterCount) {
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         throw std::out_of_range("Номер семестра находится вне диапазона.");
     }
 }
@@ -69,8 +86,12 @@ void Curriculum::validateInstance(std::string errors[], int& errorCount) const {
 
     if (!isValidTitle(title)) {
         errors[errorCount] = "Название учебной программы должно содержать только русские буквы, "
+<<<<<<< HEAD
                              "пробелы и знаки препинания (.,()\"-). Длина: от " + 
                              std::to_string(MIN_TITLE_LENGTH) + " до " + std::to_string(MAX_TITLE_LENGTH) + " символов.";
+=======
+                             "пробелы и знаки препинания (.,()\"-). Длина: от 5 до 100 символов.";
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         errorCount++;
     }
 
@@ -79,6 +100,7 @@ void Curriculum::validateInstance(std::string errors[], int& errorCount) const {
         errorCount++;
     }
 
+<<<<<<< HEAD
     if ((targetCredits > MAX_TARGET_CREDITS) && targetCredits != 0) {
         errors[errorCount] = "Зачетные единицы могут быть в промежутке [" + 
                              std::to_string(MIN_TARGET_CREDITS) + "; " + std::to_string(MAX_TARGET_CREDITS) + "]";
@@ -88,6 +110,15 @@ void Curriculum::validateInstance(std::string errors[], int& errorCount) const {
     if ((semesterCount < MIN_SEMESTER_COUNT) || (semesterCount > MAX_SEMESTER_COUNT)){
         errors[errorCount] = "Количество семестров должно быть от " + 
                              std::to_string(MIN_SEMESTER_COUNT) + " до " + std::to_string(MAX_SEMESTER_COUNT);
+=======
+    if ((targetCredits < 240 || targetCredits > 250) && targetCredits != 0) {
+        errors[errorCount] = "Зачетные единицы могут быть в промежутке [240; 250]";
+        errorCount++;
+    }
+
+    if ((semesterCount < 1) || (semesterCount > 10)){
+        errors[errorCount] = "Количество семестров должно быть меньше 1 и больше 10";
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         errorCount++;
     }
 }
@@ -98,7 +129,11 @@ Curriculum::Curriculum()
       responsiblePerson(ResponsiblePerson::NOT_ASSIGNED),
       targetCredits(0),
       level(DegreeLevel::BACHELOR),
+<<<<<<< HEAD
       semesterCount(MIN_SEMESTER_COUNT),
+=======
+      semesterCount(1),
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
       semesters(semesterCount),
       currentState(State::EDITING)
 {}
@@ -180,16 +215,21 @@ void Curriculum::print() const {
             const Discipline& discipline = pair.second;
             std::cout << "    - " << discipline.getName()
                       << " (" << discipline.getCredits() << " ЗЕ, "
+<<<<<<< HEAD
                       << discipline.getTotalHours() << " ч., "
                       << "Лек:" << discipline.getLectures()
                       << " Лаб:" << discipline.getLaboratories()
                       << " Пр:" << discipline.getPractices()
                       << " Инд:" << discipline.getIndividual()
                       << ", " << discipline.getAttestationString() << ")" << std::endl;
+=======
+                      << discipline.getDegreeLevelString() << ")" << std::endl;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         }
     }
 }
 
+<<<<<<< HEAD
 void Curriculum::printSemesterDetails(int semester) const {
     validateSemester(semester);
     
@@ -246,6 +286,8 @@ void Curriculum::printSemesterDetails(int semester) const {
     std::cout << std::string(91, '=') << "\n" << std::endl;
 }
 
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 void Curriculum::validateState() const {
     if (currentState == State::ACTIVE) {
         throw std::logic_error("Невозможно изменить учебную программу: она уже активна.");
@@ -267,10 +309,15 @@ std::string Curriculum::getTitle() const { return title; }
 
 void Curriculum::setTitle(const std::string& newTitle) {
     validateState();
+<<<<<<< HEAD
     if (!isValidTitle(newTitle)) {
         throw std::invalid_argument("Название учебной программы должно содержать только русские буквы, "
                                     "пробелы и знаки препинания (.,()\"-). Длина: от " + 
                                     std::to_string(MIN_TITLE_LENGTH) + " до " + std::to_string(MAX_TITLE_LENGTH) + " символов.");
+=======
+    if (newTitle.empty()) {
+        throw std::invalid_argument("Название учебной программы не может быть пустым.");
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     }
     title = newTitle;
 }
@@ -288,11 +335,19 @@ int Curriculum::getTargetCredits() const { return targetCredits; }
 
 void Curriculum::setTargetCredits(int newTarget) {
     validateState();
+<<<<<<< HEAD
     if (newTarget < MIN_TARGET_CREDITS && newTarget != 0) {
         throw std::invalid_argument("Зачетные единицы не могут быть меньше " + std::to_string(MIN_TARGET_CREDITS) + ".");
     }
     if (newTarget > MAX_TARGET_CREDITS) {
         throw std::invalid_argument("Целевые зачётные единицы превышают " + std::to_string(MAX_TARGET_CREDITS) + ".");
+=======
+    if (newTarget < 240 && newTarget != 0) {
+        throw std::invalid_argument("Зачетные единицы не могут быть меньше 240.");
+    }
+    if (newTarget > 250) {
+        throw std::invalid_argument("Целевые зачётные единицы превышают 250.");
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     }
     targetCredits = newTarget;
 }
@@ -312,11 +367,16 @@ int Curriculum::getSemesterCount() const { return semesterCount; }
 
 void Curriculum::setSemesterCount(int newCount) {
     validateState();
+<<<<<<< HEAD
     if (newCount < MIN_SEMESTER_COUNT) {
         throw std::invalid_argument("Количество семестров должно быть не менее " + std::to_string(MIN_SEMESTER_COUNT) + ".");
     }
     if (newCount > MAX_SEMESTER_COUNT) {
         throw std::invalid_argument("Количество семестров не может превышать " + std::to_string(MAX_SEMESTER_COUNT) + ".");
+=======
+    if (newCount < 1) {
+        throw std::invalid_argument("Количество семестров должно быть не менее 1.");
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     }
     if (newCount < semesterCount) {
         for (int semester = newCount + 1; semester <= semesterCount; ++semester) {
@@ -329,10 +389,21 @@ void Curriculum::setSemesterCount(int newCount) {
     semesterCount = newCount;
 }
 
+<<<<<<< HEAD
+=======
+// Основной метод добавления дисциплины (с исключениями)
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 void Curriculum::addDiscipline(int semester, const Discipline& discipline) {
     validateState();
     validateSemester(semester);
     
+<<<<<<< HEAD
+=======
+    if (discipline.getDegreeLevel() != level) {
+        throw std::invalid_argument("Дисциплина должна соответствовать ступени образования учебного плана.");
+    }
+    
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     auto& semesterDisciplines = semesters[semester - 1];
     if (semesterDisciplines.find(discipline.getName()) != semesterDisciplines.end()) {
         throw std::invalid_argument("Дисциплина с таким названием уже существует в этом семестре.");
@@ -341,6 +412,22 @@ void Curriculum::addDiscipline(int semester, const Discipline& discipline) {
     semesterDisciplines.emplace(discipline.getName(), discipline);
 }
 
+<<<<<<< HEAD
+=======
+// Безопасная версия добавления дисциплины
+bool Curriculum::safeAddDiscipline(int semester, const Discipline& discipline, std::string& errorMessage) {
+    try {
+        addDiscipline(semester, discipline);
+        errorMessage.clear();
+        return true;
+    } catch (const std::exception& e) {
+        errorMessage = e.what();
+        return false;
+    }
+}
+
+// Основной метод удаления дисциплины (с исключениями)
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 void Curriculum::removeDiscipline(int semester, const std::string& disciplineName) {
     validateState();
     validateSemester(semester);
@@ -353,6 +440,33 @@ void Curriculum::removeDiscipline(int semester, const std::string& disciplineNam
     semesterDisciplines.erase(it);
 }
 
+<<<<<<< HEAD
+=======
+// Безопасная версия удаления дисциплины
+bool Curriculum::safeRemoveDiscipline(int semester, const std::string& disciplineName, std::string& errorMessage) {
+    try {
+        removeDiscipline(semester, disciplineName);
+        errorMessage.clear();
+        return true;
+    } catch (const std::exception& e) {
+        errorMessage = e.what();
+        return false;
+    }
+}
+
+// Безопасная версия установки количества семестров
+bool Curriculum::safeSetSemesterCount(int newCount, std::string& errorMessage) {
+    try {
+        setSemesterCount(newCount);
+        errorMessage.clear();
+        return true;
+    } catch (const std::exception& e) {
+        errorMessage = e.what();
+        return false;
+    }
+}
+
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 int Curriculum::getDisciplineCountInSemester(int semester) const {
     validateSemester(semester);
     return static_cast<int>(semesters[semester - 1].size());
@@ -413,7 +527,11 @@ bool Curriculum::activate() {
         errorCount++;
     }
 
+<<<<<<< HEAD
     for (int semester = MIN_SEMESTER_COUNT; semester <= semesterCount; ++semester) {
+=======
+    for (int semester = 1; semester <= semesterCount; ++semester) {
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         if (getDisciplineCountInSemester(semester) == 0) {
             errors[errorCount] = "Учебный план нельзя подписать: семестр " + std::to_string(semester) + " пуст.";
             errorCount++;
@@ -430,4 +548,23 @@ bool Curriculum::activate() {
 
     currentState = State::ACTIVE;
     return true;
+<<<<<<< HEAD
+=======
+}
+
+// Безопасная версия активации
+bool Curriculum::safeActivate(std::string& errorMessage) {
+    try {
+        if (activate()) {
+            errorMessage.clear();
+            return true;
+        } else {
+            errorMessage = "Активация не удалась. Проверьте консоль для деталей.";
+            return false;
+        }
+    } catch (const std::exception& e) {
+        errorMessage = e.what();
+        return false;
+    }
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 }

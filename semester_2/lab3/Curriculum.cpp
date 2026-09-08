@@ -36,6 +36,7 @@ bool isValidTitle(const std::string& title) {
     return true;
 }
 
+<<<<<<< HEAD
 static std::string responsiblePersonToString(Curriculum::ResponsiblePerson person) {
     switch (person) {
         case Curriculum::ResponsiblePerson::TOMILOV_IN: return "Томилов И. Н.";
@@ -77,11 +78,50 @@ void Curriculum::validateInstance(std::string errors[], int& errorCount) const {
     }
 }
 
+=======
+bool isValidPersonName(const std::string& name) {
+    if (name.empty() || name.length() > 29) return false;
+    int dotCount = 0;
+    for (char c : name) if (c == '.') dotCount++;
+    
+    return (dotCount == 1 || dotCount == 2);
+}
+
+void Curriculum::validateInstance(std::string errors[], int& errorCount) const {
+    errorCount = 0;
+
+    if (!isValidCodeFormat(code)) {
+        errors[errorCount] = "Недопустимый формат кода учебной программы. Ожидаемый шаблон: XX.XX.XXX";
+        errorCount++;
+    }
+
+    if (!isValidTitle(title)) {
+        errors[errorCount] = "Название учебной программы должно содержать только русские буквы, "
+                             "пробелы и знаки препинания (.,()\"-). Длина: от 5 до 100 символов.";
+        errorCount++;
+    }
+
+    if (!isValidPersonName(responsiblePerson)) {
+        errors[errorCount] = "ФИО ответственного должно быть в формате: Фамилия И. или Фамилия И.О.";
+        errorCount++;
+    }
+
+    if ((targetCredits < 240 || targetCredits > 250) && targetCredits != 0) {
+        errors[errorCount] = "Зачетные единицы могут быть в промежутке [240; 250]";
+        errorCount++;
+    }
+}
+
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 // Конструктор по умолчанию
 Curriculum::Curriculum()
     : code("00.00.00"),
       title("Новый учебный план"),
+<<<<<<< HEAD
       responsiblePerson(ResponsiblePerson::NOT_ASSIGNED),
+=======
+      responsiblePerson("Не назначен"),
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
       targetCredits(0),
       level(DegreeLevel::BACHELOR),
       disciplineCount(0),
@@ -92,7 +132,11 @@ Curriculum::Curriculum()
 // Конструктор с параметрами
 Curriculum::Curriculum(const std::string& code,
                        const std::string& title,
+<<<<<<< HEAD
                        ResponsiblePerson responsiblePerson,
+=======
+                       const std::string& responsiblePerson,
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
                        int targetCredits,
                        DegreeLevel level)
     : code(code), title(title), responsiblePerson(responsiblePerson),
@@ -113,6 +157,7 @@ Curriculum::Curriculum(const std::string& code,
     }
 }
 
+<<<<<<< HEAD
 // Конструктор копирования  
 Curriculum::Curriculum(const Curriculum& other)
     : code(other.code),
@@ -157,6 +202,8 @@ void Curriculum::print() const {
     std::cout << "Состояние: " << getStateString() << std::endl;
 }
 
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 void Curriculum::validateState() const {
     if (currentState == State::ACTIVE) throw std::logic_error("Невозможно изменить учебную программу: она уже активна.");
 }
@@ -179,12 +226,21 @@ void Curriculum::setTitle(const std::string& newTitle) {
     title = newTitle;
 }
 
+<<<<<<< HEAD
 std::string Curriculum::getResponsiblePerson() const {
     return responsiblePersonToString(responsiblePerson);
 }
 
 void Curriculum::setResponsiblePerson(ResponsiblePerson newPerson) {
     validateState();
+=======
+std::string Curriculum::getResponsiblePerson() const { return responsiblePerson; }
+
+void Curriculum::setResponsiblePerson(const std::string& newPerson) {
+    validateState();
+    if (newPerson.empty())
+        throw std::invalid_argument("ФИО ответственного не может быть пустым.");
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     responsiblePerson = newPerson;
 }
 

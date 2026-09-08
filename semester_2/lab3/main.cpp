@@ -13,7 +13,11 @@ Curriculum testfunc(Curriculum c) {
 
 int main() {
     try {
+<<<<<<< HEAD
         Curriculum invalidPlan("недействительная_группа", "", Curriculum::ResponsiblePerson::TOMILOV_IN, -1, Curriculum::DegreeLevel::BACHELOR);
+=======
+        Curriculum invalidPlan("недействительная_группа", "", "Панфилов А.П..", -1, Curriculum::DegreeLevel::BACHELOR);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     } catch (const std::invalid_argument& e) {
         std::cout << "Перехваченное исключение:\n" << e.what() << std::endl;
     }
@@ -21,8 +25,13 @@ int main() {
         Curriculum plan0;
         plan0.print();
 
+<<<<<<< HEAD
         Curriculum plan("10.03.01", "Информационная безопасность", Curriculum::ResponsiblePerson::TOMILOV_IN, 240, Curriculum::DegreeLevel::BACHELOR);
         plan.print();
+=======
+        Curriculum plan("10.03.01", "Информационная безопасность", "Панфилов А.П.", 240, Curriculum::DegreeLevel::BACHELOR);
+        printCurriculumInfo(plan);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
         plan.setCode("2.22.02");
         plan.setTitle("Сварочное производство");
@@ -37,7 +46,11 @@ int main() {
 
         plan.print();
 
+<<<<<<< HEAD
         Curriculum plan2("09.03.03", "Прикладная информатика", Curriculum::ResponsiblePerson::IVANOV_AV, 245, Curriculum::DegreeLevel::MASTER);
+=======
+        Curriculum plan2("09.03.03", "Прикладная информатика", "Имнакулов С.А.", 245, Curriculum::DegreeLevel::MASTER);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         plan2.activate();
 
         // Проверка правила "могут быть равны 0 только одновременно"

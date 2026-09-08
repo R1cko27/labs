@@ -23,6 +23,20 @@ void Ins_Btree_edit(int val, btree **q) {
     Ins_Btree_edit(val, &(*q)->right);
 }
 
+
+// ФУНКЦИЯ С ПЕРЕМЕННЫМ КОЛИЧЕСТВОМ ПАРАМЕТРОВ
+void Ins_Btree_edit_multiple(btree **q, int count, ...) {
+    va_list args;
+    va_start(args, count);
+    
+    for (int i = 0; i < count; i++) {
+        int val = va_arg(args, int);
+        Ins_Btree_edit(val, q);
+    }
+    
+    va_end(args);
+}
+
 static void printTreeRec(btree *root, int space, int level) {
     if (root == NULL) return;
     space += level;
@@ -97,37 +111,9 @@ int Delete_edit(int key, btree **node) {
   return Delete_edit(key, &(*node)->left);
 }
 
-void export_tree_to_json_rec(FILE *file, btree *node) {
-    if (node == NULL) {
-        fprintf(file, "null");
-        return;
-    }
-    
-    fprintf(file, "{");
-    fprintf(file, "\"value\": %d, ", node->value);
-    
-    fprintf(file, "\"left\": ");
-    export_tree_to_json_rec(file, node->left);
-    
-    fprintf(file, ", \"right\": ");
-    export_tree_to_json_rec(file, node->right);
-    
-    fprintf(file, "}");
-}
-
-int export_tree_to_json(btree *root, const char *filename) {
-    FILE *file = fopen(filename, "w");
-    if (file == NULL) {
-        printf("Ошибка открытия файла %s\n", filename);
-        return 0;
-    }
-    export_tree_to_json_rec(file, root);
-    fclose(file);
-    return 1;
-}
 
 int main() {
-  int d[] = {50,55,53,60,40,52,59,58,57,0};
+  int d[] = {50,30,55,25,35,53,60,10,32,0};
   int i = 0;
   btree *root = NULL;
   
@@ -135,14 +121,14 @@ int main() {
     if(d[i] == 0) break;
     Ins_Btree_edit(d[i], &root); i++; // заполняем дерево массивом чисел
   }
-  export_tree_to_json(root, "export/export1.json");
+  
+  Ins_Btree_edit_multiple(&root, 6, 37, 62, 15, 31, 33, 40);
 
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 
   Delete_edit(55, &root); // удаляем узел с значением 37
-  //Ins_Btree_edit(67, &root); // добавляем узел с значением 67
+  Ins_Btree_edit(67, &root); // добавляем узел с значением 67
 
-  export_tree_to_json(root, "export/export2.json");
   printf("After Delete and Past:\n");
   printTreeRec(root, 0, 5); printf("\n"); // выводим дерево
 

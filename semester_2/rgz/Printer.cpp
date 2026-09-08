@@ -25,6 +25,7 @@ Printer::Printer(const std::string& model, Manufacturer manufacturer, int year, 
     }
 }
 
+<<<<<<< HEAD
 // Printer::~Printer() {}
 
 PrinterColorType Printer::getColorType() const { return colorType; }
@@ -40,6 +41,18 @@ int Printer::getPrintSpeedPPM() const { return printSpeedPPM; }
 int Printer::getPrintResolutionDPI() const { return printResolutionDPI; }
 ConsumableType Printer::getConsumableType() const { return consumableType; }
 ConsumableType Printer::getConsumableTypeEnum() const { return consumableType; }
+=======
+Printer::~Printer() {}
+
+PrinterColorType Printer::getColorType() const { return colorType; }
+bool Printer::getDuplexPrint() const { return duplexPrint; }
+PaperFormat Printer::getMaxPaperFormat() const { return maxPaperFormat; }
+Interface Printer::getInterfaces() const { return interfaces; }
+ApplicationArea Printer::getApplicationArea() const { return applicationArea; }
+int Printer::getPrintSpeedPPM() const { return printSpeedPPM; }
+int Printer::getPrintResolutionDPI() const { return printResolutionDPI; }
+ConsumableType Printer::getConsumableType() const { return consumableType; }
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
 void Printer::setColorType(PrinterColorType type) { colorType = type; }
 void Printer::setDuplexPrint(bool duplex) { duplexPrint = duplex; }
@@ -128,5 +141,9 @@ std::string Printer::toString() const {
 std::ostream& operator<<(std::ostream& os, const Printer& printer) {
     os << printer.toString();
     return os;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

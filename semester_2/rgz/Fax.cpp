@@ -3,6 +3,10 @@
 #include <vector>
 #include <set>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 Fax::Fax()
     : OfficeEquipment(), transmissionSpeedBPS(14400), scanResolutionDPI(203),
       memoryCapacityPages(100), hasAutomaticFeeder(true),
@@ -26,6 +30,7 @@ Fax::Fax(const std::string& model, Manufacturer manufacturer, int year, double p
         this->memoryCapacityPages = 100;
 }
 
+<<<<<<< HEAD
 // Fax::~Fax(){}
 
 AutoFeederType Fax::getAutoFeederType() const { return autoFeederType; }
@@ -34,6 +39,13 @@ Interface Fax::getInterfaces() const { return interfaces; }
 Interface Fax::getInterfacesEnum() const { return interfaces; }
 ApplicationArea Fax::getApplicationArea() const { return applicationArea; }
 ApplicationArea Fax::getApplicationAreaEnum() const { return applicationArea; }
+=======
+Fax::~Fax(){}
+
+AutoFeederType Fax::getAutoFeederType() const { return autoFeederType; }
+Interface Fax::getInterfaces() const { return interfaces; }
+ApplicationArea Fax::getApplicationArea() const { return applicationArea; }
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 int Fax::getTransmissionSpeedBPS() const { return transmissionSpeedBPS; }
 int Fax::getScanResolutionDPI() const { return scanResolutionDPI; }
 int Fax::getMemoryCapacityPages() const {return memoryCapacityPages; }
@@ -63,6 +75,10 @@ bool Fax::validateTransmissionSpeed(int speed) {
     return speed >= 2400 && speed <= 33600 && speed%100 == 0;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 bool Fax::validateScanResolution(int resolution) {
     return resolution >= 100 && resolution <= 600;
 }
@@ -123,5 +139,9 @@ std::string Fax::toString() const {
 std::ostream& operator<<(std::ostream& os, const Fax& fax){
     os << fax.toString();
     return os;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

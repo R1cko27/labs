@@ -20,6 +20,7 @@ public:
     Fax(const std::string& model, Manufacturer manufacturer, int year, double price,
         int transmissionSpeed, int scanResolution, int memoryPages, bool autoFeeder,
         AutoFeederType autoFeederType, Interface interfaces, ApplicationArea applicationArea);
+<<<<<<< HEAD
     ~Fax() = default;
 
     AutoFeederType getAutoFeederType() const;
@@ -28,6 +29,13 @@ public:
     Interface getInterfacesEnum() const;
     ApplicationArea getApplicationArea() const;
     ApplicationArea getApplicationAreaEnum() const;
+=======
+    ~Fax();
+
+    AutoFeederType getAutoFeederType() const;
+    Interface getInterfaces() const;
+    ApplicationArea getApplicationArea() const;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     int getTransmissionSpeedBPS() const;
     int getScanResolutionDPI() const;
     int getMemoryCapacityPages() const;
@@ -51,5 +59,9 @@ public:
     static bool validateMemoryCapacity(int pages);
 };
 
+<<<<<<< HEAD
 #endif
 
+=======
+#endif
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

@@ -326,4 +326,7 @@ AutoFeederType inputAutoFeederType() {
         std::cout << "ОШИБКА: Введите число от 0 до 2!\n";
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

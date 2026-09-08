@@ -5,6 +5,8 @@
 #include <limits>
 #include <new>
 #include <stdexcept>
+#include <string> 
+#include <algorithm>
 
 int currentYear() {
     const std::time_t now = std::time(nullptr);
@@ -41,8 +43,14 @@ bool isLevelValueValid(int raw) {
 }
 
 void StudentGroup::init(const std::string& name, StudyDirection dir, int year, EducationLevel lvl) {
-    if (name.size() < 5 || name.find('-') == std::string::npos) 
-        throw std::invalid_argument("Некорректное название группы: минимум 5 символов и дефис обязательны");
+    auto pos = name.find('-');
+    if (pos == std::string::npos || pos < 2 || pos > 4 || 
+        name.size() - pos - 1 != 3 || 
+        !std::all_of(name.begin(), name.begin() + pos, ::isalpha) ||
+        !std::all_of(name.begin() + pos + 1, name.end(), ::isdigit)) 
+    {
+        throw std::invalid_argument("Некорректное название группы: требуется формат AAA-BBB (2-4 буквы, дефис, 3 цифры)");
+    }
     
     const int dirValue = static_cast<int>(dir);
     if (!isDirectionValueValid(dirValue)) throw std::out_of_range("Некорректное направление обучения");
@@ -92,4 +100,3 @@ StudentGroup* createGroup(const std::string& name,
         return nullptr;
     }
 }
-

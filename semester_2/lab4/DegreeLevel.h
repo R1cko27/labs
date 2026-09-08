@@ -4,9 +4,15 @@
 #include <string>
 
 enum class DegreeLevel {
+<<<<<<< HEAD
     BACHELOR,       ///< Бакалавр
     MASTER,         ///< Магистратура
     POSTGRADUATE    ///< Аспирантура
+=======
+    BACHELOR,
+    MASTER,
+    POSTGRADUATE
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 };
 
 inline std::string degreeLevelToString(DegreeLevel level) {
@@ -18,4 +24,8 @@ inline std::string degreeLevelToString(DegreeLevel level) {
     }
 }
 
+<<<<<<< HEAD
 #endif // DEGREE_LEVEL_H
+=======
+#endif // DEGREE_LEVEL_H
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

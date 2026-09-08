@@ -32,6 +32,7 @@ class Curriculum {
 
         void validateState() const;
         void validateInstance(std::string errors[], int& errorCount) const;
+<<<<<<< HEAD
     public:
         // Конструкторы
         Curriculum();                                           // конструктор по умолчанию
@@ -44,6 +45,13 @@ class Curriculum {
         ~Curriculum();
         // Оператор присваивания копированием
         Curriculum& operator=(const Curriculum& other);
+=======
+
+    public:
+        Curriculum();
+        Curriculum(const std::string& code, const std::string& title,
+                   const std::string& responsiblePerson, int targetCredits, DegreeLevel level);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
         // Геттеры и сеттеры
         std::string getCode() const;

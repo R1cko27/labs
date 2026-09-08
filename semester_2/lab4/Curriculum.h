@@ -9,6 +9,7 @@
 
 class Curriculum {
     public:
+<<<<<<< HEAD
         // Статические константы (допустимые пределы)
         static constexpr int MIN_TARGET_CREDITS = 240;  ///< Минимальные целевые ЗЕ (единиц)
         static constexpr int MAX_TARGET_CREDITS = 250;  ///< Максимальные целевые ЗЕ (единиц)
@@ -23,6 +24,8 @@ class Curriculum {
         static constexpr int MIN_CODE_SPECIALTY = 1;    ///< Минимальная специальность в коде
         static constexpr int MAX_CODE_SPECIALTY = 9;    ///< Максимальная специальность в коде
 
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         enum class ResponsiblePerson {
             TOMILOV_IN, BAKAEV_MA, PAVLOV_AV,
             GRIF_MG, IVANOV_AV, GUZHOV_VI,
@@ -37,6 +40,7 @@ class Curriculum {
             ACTIVE
         };
     private:
+<<<<<<< HEAD
         std::string code;                                   ///< Шифр учебной программы (строка)
         std::string title;                                  ///< Название учебной программы (символы)
         ResponsiblePerson responsiblePerson;                ///< ФИО ответственного лица (перечисление)
@@ -45,6 +49,16 @@ class Curriculum {
         int semesterCount;                                  ///< Количество семестров (шт)
         std::vector<std::map<std::string, Discipline>> semesters;  ///< Контейнер дисциплин по семестрам
         State currentState;                                 ///< Текущее состояние плана (перечисление)
+=======
+        std::string code;
+        std::string title;
+        ResponsiblePerson responsiblePerson;
+        int targetCredits;
+        DegreeLevel level;
+        int semesterCount;
+        std::vector<std::map<std::string, Discipline>> semesters;
+        State currentState;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
         void validateState() const;
         void validateSemester(int semester) const;
@@ -57,7 +71,11 @@ class Curriculum {
                    ResponsiblePerson responsiblePerson, int targetCredits, DegreeLevel level,
                    int semesterCount = 1);
         
+<<<<<<< HEAD
         Curriculum(const Curriculum& other); // Конструктор копирования
+=======
+        Curriculum(const Curriculum& other);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         ~Curriculum();
         Curriculum& operator=(const Curriculum& other);
 
@@ -84,6 +102,15 @@ class Curriculum {
         // Методы с исключениями
         void addDiscipline(int semester, const Discipline& discipline);
         void removeDiscipline(int semester, const std::string& disciplineName);
+<<<<<<< HEAD
+=======
+        
+        // Безопасные методы
+        bool safeAddDiscipline(int semester, const Discipline& discipline, std::string& errorMessage);
+        bool safeRemoveDiscipline(int semester, const std::string& disciplineName, std::string& errorMessage);
+        bool safeSetSemesterCount(int newCount, std::string& errorMessage);
+        bool safeActivate(std::string& errorMessage);
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 
         int getDisciplineCountInSemester(int semester) const;
         int getTotalDisciplineCreditsInSemester(int semester) const;
@@ -95,7 +122,10 @@ class Curriculum {
 
         bool activate();
         void print() const;
+<<<<<<< HEAD
         void printSemesterDetails(int semester) const;
+=======
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 };
 
 #endif

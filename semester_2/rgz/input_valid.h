@@ -8,6 +8,10 @@
 #include "Printer.h"
 #include "Fax.h"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
 void clearInput();
 std::string inputModel();
 int inputYear();
@@ -28,5 +32,9 @@ AutoFeederType inputAutoFeederType();
 
 void displayEquipmentList(const std::list<std::unique_ptr<OfficeEquipment>>& equipmentList);
 
+<<<<<<< HEAD
 #endif
 
+=======
+#endif
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

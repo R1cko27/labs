@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stdexcept>
+<<<<<<< HEAD
 
 enum class AttestationType {
     EXAM,   ///< Экзамен
@@ -49,11 +50,25 @@ public:
             throw std::invalid_argument("Сумма часов (лекции + лабораторные + практики + индивидуальные) должна быть равна " + 
                                        std::to_string(expectedHours) + " (" + std::to_string(credits) + " ЗЕ * " + 
                                        std::to_string(HOURS_PER_CREDIT) + ")");
+=======
+#include "DegreeLevel.h"
+
+class Discipline {
+public:
+    Discipline(const std::string& name, int credits, DegreeLevel level)
+        : name(name), credits(credits), level(level) {
+        if (name.empty()) {
+            throw std::invalid_argument("Название дисциплины не может быть пустым.");
+        }
+        if (credits < 1) {
+            throw std::invalid_argument("Количество зачётных единиц может быть в пределе от 2 до 6");
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         }
     }
 
     std::string getName() const { return name; }
     int getCredits() const { return credits; }
+<<<<<<< HEAD
     int getLectures() const { return lectures; }
     int getLaboratories() const { return laboratories; }
     int getPractices() const { return practices; }
@@ -75,3 +90,15 @@ private:
 };
 
 #endif // DISCIPLINE_H
+=======
+    DegreeLevel getDegreeLevel() const { return level; }
+    std::string getDegreeLevelString() const { return degreeLevelToString(level); }
+
+private:
+    std::string name;
+    int credits;
+    DegreeLevel level;
+};
+
+#endif // DISCIPLINE_H
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

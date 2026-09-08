@@ -6,6 +6,10 @@ OfficeEquipment::OfficeEquipment() : model("Unknown"), manufacturer(Manufacturer
 OfficeEquipment::OfficeEquipment(const std::string& model, Manufacturer manufacturer,
                                  int year, double price)
     : model(model), manufacturer(manufacturer), yearOfManufacture(year), price(price){
+<<<<<<< HEAD
+=======
+    // Валидация в конструкторе
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     if (!validateModel(model)) {
         this->model = "Unknown";
     }
@@ -17,11 +21,18 @@ OfficeEquipment::OfficeEquipment(const std::string& model, Manufacturer manufact
     }
 }
 
+<<<<<<< HEAD
 //OfficeEquipment::~OfficeEquipment(){}
 
 std::string OfficeEquipment::getModel() const { return model; }
 Manufacturer OfficeEquipment::getManufacturerEnum() const { return manufacturer; }
 std::string OfficeEquipment::getManufacturer() const {
+=======
+OfficeEquipment::~OfficeEquipment(){}
+
+std::string OfficeEquipment::getModel() const { return model; }
+std::string OfficeEquipment::getManufacturer() const { 
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     switch (manufacturer) {
         case Manufacturer::Brother: return "Brother";
         case Manufacturer::Canon: return "Canon";
@@ -91,5 +102,9 @@ std::string OfficeEquipment::toString() const{
 std::ostream& operator<<(std::ostream& os, const OfficeEquipment& equipment){
     os << equipment.toString();
     return os;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

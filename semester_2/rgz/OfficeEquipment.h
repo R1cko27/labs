@@ -21,11 +21,18 @@ class OfficeEquipment{
     public:
         OfficeEquipment();
         OfficeEquipment(const std::string& model, Manufacturer manufacturer, int year, double price);
+<<<<<<< HEAD
         virtual ~OfficeEquipment() = default;
         friend std::ostream& operator<<(std::ostream& os, const OfficeEquipment& equipment);
 
         std::string getModel() const;
         Manufacturer getManufacturerEnum() const;
+=======
+        virtual ~OfficeEquipment();
+        friend std::ostream& operator<<(std::ostream& os, const OfficeEquipment& equipment);
+
+        std::string getModel() const;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
         std::string getManufacturer() const;
         int getYearOfManufacture() const;
         double getPrice() const;
@@ -75,3 +82,7 @@ enum class ApplicationArea { Home, Office };
 
 #endif
 
+<<<<<<< HEAD
+=======
+// Методы класса представлены ниже в отчёте
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885

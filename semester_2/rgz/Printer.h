@@ -12,7 +12,11 @@ private:
     PrinterColorType colorType; // Тип печати
     bool duplexPrint;       // Наличие двусторонней печати
     PaperFormat maxPaperFormat; // Максимальный формат бумаги
+<<<<<<< HEAD
     Interface interfaces;  // Тип подключенияs
+=======
+    Interface interfaces;  // Тип подключения
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     ApplicationArea applicationArea; // Область применения
     int printSpeedPPM; // Скорость печати в страницах в минуту
     int printResolutionDPI; // Разрешение печати
@@ -24,6 +28,7 @@ public:
             PrinterColorType colorType, bool duplexPrint, PaperFormat maxPaperFormat,
             Interface interfaces, ApplicationArea applicationArea,
             int speedPPM, int resolutionDPI, ConsumableType consumable);
+<<<<<<< HEAD
     ~Printer() = default;
 
     PrinterColorType getColorType() const;
@@ -39,6 +44,18 @@ public:
     int getPrintResolutionDPI() const;
     ConsumableType getConsumableType() const;
     ConsumableType getConsumableTypeEnum() const;
+=======
+    ~Printer();
+
+    PrinterColorType getColorType() const;
+    bool getDuplexPrint() const;
+    PaperFormat getMaxPaperFormat() const;
+    Interface getInterfaces() const;
+    ApplicationArea getApplicationArea() const;
+    int getPrintSpeedPPM() const;
+    int getPrintResolutionDPI() const;
+    ConsumableType getConsumableType() const;
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
     
     void setColorType(PrinterColorType type);
     void setDuplexPrint(bool duplex);
@@ -57,5 +74,9 @@ public:
     static bool validatePrintResolution(int resolution);
 };
 
+<<<<<<< HEAD
 #endif
 
+=======
+#endif
+>>>>>>> 958e5f4cc1a1402d8ed9df90272f22de110ca885
