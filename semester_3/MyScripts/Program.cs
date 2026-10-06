@@ -1,56 +1,31 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
-namespace CarExample
-
-{    [ExcludeFromCodeCoverage]
-    class Car
-    {
-        private string model;
-        private int year;
-        private string color;
-
-        public Car(string model, int year, string color)
-        {
-            this.model = model;
-            this.year = year;
-            this.color = color;
-        }
-
-        public void StartEngine()
-        {
-            Console.WriteLine($"{model} заводит двигатель... Бррр!");
-        }
-
-        public void Drive(int distance)
-        {
-            Console.WriteLine($"{model} проехал {distance} км.");
-        }
-
-        public void ShowInfo()
-        {
-            Console.WriteLine($"Модель: {model}");
-            Console.WriteLine($"Год: {year}");
-            Console.WriteLine($"Цвет: {color}");
-        }
-    }
-
-    // Главный класс программы
+namespace Practic2
+{
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            // Создаем объект (экземпляр класса Car)
-            Car myCar = new Car("Toyota Camry", 2022, "Серебристый");
+            // ---- Задание: DoOperation с enum ----
+            Calculator.Title("Задание: DoOperation через перечисление");
+            int a = 8, b = 3;
+            var ops = new[]
+            {
+                Calculator.Operation.Add, Calculator.Operation.Subtract, Calculator.Operation.Multiply,
+                Calculator.Operation.Divide, Calculator.Operation.Power, Calculator.Operation.Sqrt
+            };
+            Console.WriteLine($"a = {a}, b = {b}   (для Sqrt используется только a)");
+            Console.WriteLine($"{"Операция",-10} {"switch-оператор",-18}");
+            foreach (var op in ops)
+            {
+                int r1 = Calculator.DoOperationSwitch(op, a, b);
+                Console.WriteLine($"{op,-10} {r1,-18}");
+            }
 
-            // Используем методы объекта
-            myCar.ShowInfo();
+            // демонстрация защиты от ошибок
             Console.WriteLine();
-            myCar.StartEngine();
-            myCar.Drive(150);
-
-            Console.WriteLine("\nНажмите Enter для выхода...");
-            Console.ReadLine();
+            try { Calculator.DoOperationSwitch(Calculator.Operation.Divide, 5, 0); }
+            catch (DivideByZeroException e) { Console.WriteLine("Divide/0 -> " + e.Message); }
         }
     }
 }

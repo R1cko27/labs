@@ -17,7 +17,7 @@ namespace OfficeEquipmentLibrary
         A5
     }
 
-    public enum ConsumableType
+    public enum ConsumableType // Расходники
     {
         Toner,
         Ink,

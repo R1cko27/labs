@@ -102,7 +102,7 @@ namespace OfficeEquipmentLibrary
 #if STAGE_3
         static void RunStage3()
         {
-            List<OfficeEquipment> equipmentList = new List<OfficeEquipment>();
+            List<OfficeEquipment> equipmentList = new List<OfficeEquipment>(); // объявление и создание динамического списка
             int choice;
 
             do

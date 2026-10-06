@@ -1,0 +1,15 @@
+D:\all_labs_main\labs\semester_3\Practic1\bin\Debug\net10.0\Practic1.exe
+D:\all_labs_main\labs\semester_3\Practic1\bin\Debug\net10.0\Practic1.deps.json
+D:\all_labs_main\labs\semester_3\Practic1\bin\Debug\net10.0\Practic1.runtimeconfig.json
+D:\all_labs_main\labs\semester_3\Practic1\bin\Debug\net10.0\Practic1.dll
+D:\all_labs_main\labs\semester_3\Practic1\bin\Debug\net10.0\Practic1.pdb
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.GeneratedMSBuildEditorConfig.editorconfig
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.AssemblyInfoInputs.cache
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.AssemblyInfo.cs
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.csproj.CoreCompileInputs.cache
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.sourcelink.json
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.dll
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\refint\Practic1.dll
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.pdb
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\Practic1.genruntimeconfig.cache
+D:\all_labs_main\labs\semester_3\Practic1\obj\Debug\net10.0\ref\Practic1.dll

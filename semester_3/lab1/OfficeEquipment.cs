@@ -3,7 +3,7 @@ using System;
 
 namespace OfficeEquipmentLibrary
 {
-    public enum Manufacturer
+    public enum Manufacturer // Перечисление производителей
     {
         Brother,
         Canon,
@@ -18,10 +18,10 @@ namespace OfficeEquipmentLibrary
     }
 
     [Flags] // Используем битовую маску
-    public enum Interface
+    public enum Interface // Перечисление интерфейсов 
     {
-        Bluetooth = 1 << 0,    // 1
-        EthernetRJ45 = 1 << 1, // 2
+        Bluetooth = 1 << 0,    // 1 (0000 0001 << 0 = 0000 0001 = 1)
+        EthernetRJ45 = 1 << 1, // 2 (0000 0001 << 1 = 0000 0010 = 2)
         NFC = 1 << 2,          // 4
         RJ11 = 1 << 3,         // 8
         USB = 1 << 4,          // 16
@@ -30,13 +30,13 @@ namespace OfficeEquipmentLibrary
         WiFi = 1 << 7          // 128
     }
 
-    public enum ApplicationArea
+    public enum ApplicationArea // Перечисление областей применения
     {
         Home,
         Office
     }
 
-    public class OfficeEquipment
+    public class OfficeEquipment // Базовый класс для офисного оборудования
 
     {
         private string model;
